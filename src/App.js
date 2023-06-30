@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { CarDetails, CarsList, Feedbacks, ForgetPassword, Home, Login, MyBookings, MyCars, Settings, Signup } from "./pages";
+import { AddCar, CarDetails, CarsList, Feedbacks, ForgetPassword, Home, Login, MyBookings, MyCars, Settings, Signup } from "./pages";
 
 function App() {
     return (
@@ -14,7 +14,8 @@ function App() {
                 <Route path="/mycars" element={<MyCars />} />
                 <Route path="/feedbacks" element={<Feedbacks />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/forgetpass" element={<ForgetPassword />} />
+                <Route path="/forgetpassword" element={<ForgetPassword />} />
+                <Route path="/addcar" element={<AddCar />} />
             </Routes>
         </>
     );
