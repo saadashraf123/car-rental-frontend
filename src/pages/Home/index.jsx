@@ -1,11 +1,11 @@
 import React from 'react'
 import "./style.module.css"
-import { Contact, Featured, Footer, HeroBanner, Navbar, SearchSection } from '../../components'
+import { Contact, Featured, Footer, HeroBanner, NavBar, SearchSection } from '../../components'
 
 const Home = () => {
     return (
         <>
-            <Navbar />
+            <NavBar />
             <HeroBanner />
             <SearchSection />
             <Featured />

@@ -17,3 +17,5 @@ export { default as MyBookings } from "./MyBookings";
 export { default as Feedbacks } from "./Feedbacks";
 
 export { default as Settings } from "./Settings";
+
+export { default as AddCar } from "./AddCar"
