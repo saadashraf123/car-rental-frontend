@@ -2,9 +2,23 @@ import React from 'react'
 import "./style.module.css"
 import { Grid, TextField, Button, Link, Paper, Typography, Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useForm } from "react-hook-form";
+
 
 const Signup = () => {
     const defaultTheme = createTheme();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            firstName: '',
+            lastname: '',
+            email: '',
+            password: ''
+        }
+    }
+    );
+    const signupHandler = (data) => {
+        console.log(data);
+    }
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -35,45 +49,54 @@ const Signup = () => {
                             Car Rental System
                         </Typography>
                         <Typography component="h1" variant="h4">
-                            Sign in
+                            Sign Up
                         </Typography>
-                        <Box component="form" onSubmit={""} sx={{ mt: 1 }}>
+                        <Box component="form" onSubmit={handleSubmit(signupHandler)} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 name="firstname"
                                 label="First Name"
                                 type="text"
-                                id="lastname"
+                                id="firstname"
+                                {...register("firstname", { required: true })}
+
                             />
+                            {errors.firstname?.type === 'required' && <p role="alert" className='text-danger'>*First name is required</p>}
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 name="lastname"
                                 label="Last Name"
                                 type="text"
                                 id="lastname"
+                                {...register("lastname", { required: true })}
                             />
+                            {errors.lastname?.type === 'required' && <p className='text-danger' role="alert">*Last name is required</p>}
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
                                 autoFocus
+                                {...register("email", { required: true })}
                             />
+                            {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 name="password"
                                 label="Password"
                                 type="password"
                                 id="password"
+                                {...register("password", { required: true })}
                             />
+                            {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
                             {/* <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"

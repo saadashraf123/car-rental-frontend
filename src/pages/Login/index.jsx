@@ -2,10 +2,20 @@ import React from 'react'
 import "./style.module.css"
 import { Grid, TextField, Button, Link, Paper, Typography, Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useForm } from "react-hook-form";
 
 
 const Login = () => {
     const defaultTheme = createTheme();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            email: '',
+            password: ''
+        }
+    });
+    const loginHandler = (data) => {
+        console.log(data);
+    }
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -38,25 +48,29 @@ const Login = () => {
                         <Typography component="h1" variant="h4">
                             Sign in
                         </Typography>
-                        <Box component="form" onSubmit={""} sx={{ mt: 1 }}>
+                        <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
+                                {...register("email", { required: true })}
                                 autoFocus
                             />
+                            {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
                             <TextField
                                 margin="normal"
-                                required
+                                // required
                                 fullWidth
                                 name="password"
                                 label="Password"
                                 type="password"
                                 id="password"
+                                {...register("password", { required: true })}
                             />
+                            {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
                             {/* <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
@@ -85,7 +99,7 @@ const Login = () => {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 export default Login
