@@ -1,23 +1,14 @@
 import React from 'react'
 import "./style.module.css"
-import { Container, Grid, TextField, Button, MenuItem, createStyles, Paper, Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Container, Grid, TextField, MenuItem, createStyles, Paper, Box, Typography } from '@mui/material';
+import ButtonComponent from '../Button';
 
 
 const SearchSection = () => {
     const classes = createStyles({
-        ButtonStyles:
+        extraStyles:
         {
-            backgroundColor: "red",
-            color: "white",
             width: 200,
-            maxWidth: '200px',
-            fontWeight: "bold",
-            p: 2,
-            '&:hover': {
-                backgroundColor: 'white',
-                color: "red"
-            },
         },
         textInputStyles: {
             width: 400,
@@ -30,7 +21,7 @@ const SearchSection = () => {
                 display: 'flex',
                 flexDirection: 'column'
             }} container spacing={5} alignItems="center" component={Paper} elevation={6}>
-                <Typography component="h4" variant="h4" sx={{ color: "red", fontWeight: "semi-bold", mt: 3 }}>
+                <Typography component="h4" variant="h4" sx={{ color: "#DC3545", fontWeight: "semi-bold", mt: 3 }}>
                     Search For Your Favorite Car
                 </Typography>
                 <Grid item container
@@ -86,9 +77,7 @@ const SearchSection = () => {
                         my: 2,
                     }}
                 >
-                    <Button variant="contained" component={Link} to={'/details'} sx={classes.ButtonStyles}>
-                        Search
-                    </Button>
+                    <ButtonComponent text={"Search Car"} variant={"contained"} size={"medium"} extraStyles={classes.extraStyles} to={"/search"} />
                 </Box>
             </Box>
         </Container >

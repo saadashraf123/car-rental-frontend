@@ -14,4 +14,4 @@ export { default as Footer } from "./Footer";
 
 export { default as Reviews } from "./Reviews";
 
-export { default as Button } from "./Button";
+export { default as ButtonComponent } from "./Button";

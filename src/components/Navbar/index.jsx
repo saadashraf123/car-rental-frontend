@@ -5,10 +5,12 @@ import { FaCarSide } from 'react-icons/fa';
 import { RxAvatar } from 'react-icons/rx';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconButton } from '@mui/material'
-
+import ButtonComponent from '../Button';
+import { createStyles } from '@mui/material'
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
     window.onscroll = function () {
         if (window.pageYOffset > 0) {
             setScrolled(true)
@@ -16,6 +18,23 @@ const NavBar = () => {
             setScrolled(false)
         }
     }
+    const classes = createStyles({
+        extraStyles:
+        {
+            width: 100,
+            p: 1,
+            mt: 1,
+
+        },
+        scrolledStyles: {
+            backgroundColor: "white",
+            color: "#DC3545",
+            '&:hover': {
+                backgroundColor: "#DC3545",
+                color: "white",
+            },
+        }
+    });
     return (
         <nav className={`navbar sticky-top navbar-expand-lg ${scrolled ? styles.scrolled : "bg-white"}`} >
             <div className="container-fluid">
@@ -26,8 +45,6 @@ const NavBar = () => {
                 <IconButton className={`navbar-toggler ${styles.icon}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <GiHamburgerMenu className={`navbar-toggler-icon ${scrolled ? styles.scrolled : styles.unScrolled}`} />
                 </IconButton>
-                {/* <button className={`navbar-toggler ${scrolled ? "bg-danger" : "bg-danger"}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                </button> */}
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li className="nav-item">
@@ -56,44 +73,49 @@ const NavBar = () => {
                             </Link>
                         </li>
                     </ul>
-                    <div className="navbar-nav nav-item dropdown">
-                        <a className={`nav-link dropdown-toggle ${scrolled ? "text-white" : "text-danger"}`} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <RxAvatar className='fs-1' />
-                        </a>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li>
-                                <Link to="/addcar" className='dropdown-item' >
-                                    Add New Car
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/mycars" className='dropdown-item' >
-                                    My Cars
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/mybookings" className='dropdown-item' >
-                                    My Bookings
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/feedbacks" className='dropdown-item' >
-                                    Reviews
-                                </Link>
-                            </li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li>
-                                <Link to="/settings" className='dropdown-item' >
-                                    Settings
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/" className='dropdown-item' >
-                                    Logout
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    {loggedIn ?
+                        <div className="navbar-nav nav-item dropdown">
+                            <a className={`nav-link dropdown-toggle ${scrolled ? "text-white" : "text-danger"}`} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <RxAvatar className='fs-1' />
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <Link to="/addcar" className='dropdown-item' >
+                                        Add New Car
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/mycars" className='dropdown-item' >
+                                        My Cars
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/mybookings" className='dropdown-item' >
+                                        My Bookings
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/feedbacks" className='dropdown-item' >
+                                        Reviews
+                                    </Link>
+                                </li>
+                                <li><hr className="dropdown-divider" /></li>
+                                <li>
+                                    <Link to="/settings" className='dropdown-item' >
+                                        Settings
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/" className='dropdown-item' >
+                                        Logout
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div> :
+                        <>
+                            <ButtonComponent text={"Login"} variant={"contained"} size={"medium"} extraStyles={classes.extraStyles} scrolledStyles={scrolled && classes.scrolledStyles} to={"/login"} />
+                            <ButtonComponent text={"Register"} variant={"contained"} size={"medium"} extraStyles={classes.extraStyles} scrolledStyles={scrolled && classes.scrolledStyles} to={"/signup"} />
+                        </>}
                 </div>
             </div>
         </nav >

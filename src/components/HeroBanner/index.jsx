@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { BiSolidRightArrowCircle } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import ButtonComponent from '../Button';
 
 const defaultTheme = createTheme(
     {
@@ -19,28 +20,12 @@ const defaultTheme = createTheme(
         }
     });
 const HeroBanner = () => {
-    // const defaultTheme = createTheme();
     const classes = createStyles({
-        ButtonStyles:
-        {
-            backgroundColor: "red",
-            color: "white",
-            width: '100%',
-            maxWidth: '200px',
-            fontWeight: "bold",
-            mt: 2,
-            mr: 1,
-            p: 2,
-            '&:hover': {
-                backgroundColor: 'white',
-                color: "red"
-            },
-        },
         ExtraStyles: {
             backgroundColor: "white",
-            color: "red",
+            color: "#DC3545",
             '&:hover': {
-                backgroundColor: 'red',
+                backgroundColor: '#DC3545',
                 color: "white"
             },
         }
@@ -57,10 +42,9 @@ const HeroBanner = () => {
                                 mx: 8,
                                 display: 'flex',
                                 flexDirection: 'column',
-                                // alignItems: 'center',
                             }}
                         >
-                            <Typography component="h4" variant="h4" sx={{ color: "red", fontWeight: "semi-bold" }}>
+                            <Typography component="h4" variant="h4" sx={{ color: "#DC3545", fontWeight: "semi-bold" }}>
                                 Discover the Joy of Rental!
                             </Typography>
                             <Typography component="h4" variant="h3">
@@ -71,14 +55,8 @@ const HeroBanner = () => {
                                 flexible pick-up options and much more.
                             </Typography>
                             <Box>
-                                <Button variant="contained" size='medium' component={Link} to={'/details'} sx={classes.ButtonStyles}
-                                    endIcon={<BsCheckCircleFill />}>
-                                    Book Car
-                                </Button>
-                                <Button variant="contained" size='medium' component={Link} to={'/details'} sx={[classes.ButtonStyles, classes.ExtraStyles]}
-                                    endIcon={<BiSolidRightArrowCircle />}>
-                                    Learn More
-                                </Button>
+                                <ButtonComponent text={"Book Car"} variant={"contained"} size={"medium"} to={"/details"} icon={<BsCheckCircleFill />} />
+                                <ButtonComponent text={"Learn More"} variant={"contained"} size={"medium"} to={"/details"} extraStyles={classes.ExtraStyles} icon={<BiSolidRightArrowCircle />} />
                             </Box>
                         </Box>
                     </Grid>

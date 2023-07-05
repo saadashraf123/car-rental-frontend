@@ -1,11 +1,23 @@
 import React from 'react'
 import "./style.module.css"
-import { Grid, TextField, Button, Link, Paper, Typography, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Grid, TextField, createStyles, Paper, Typography, Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
+import { ButtonComponent } from '../../components';
 
 
 const Signup = () => {
+
+    const classes = createStyles({
+        extraStyles:
+        {
+            width: "100%",
+            maxWidth: 500,
+            p: 1,
+            mb: 2
+        }
+    });
     const defaultTheme = createTheme();
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -97,21 +109,10 @@ const Signup = () => {
                                 {...register("password", { required: true })}
                             />
                             {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
-                            {/* <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            /> */}
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Sign Up
-                            </Button>
+                            <ButtonComponent variant={"contained"} text={"Sign up"} btnType={"submit"} extraStyles={classes.extraStyles} />
                             <Grid container>
                                 <Grid item>
-                                    <Link href="/login" variant="body2">
+                                    <Link to="/login" variant="body2">
                                         {"Already have an account? Sign In"}
                                     </Link>
                                 </Grid>
