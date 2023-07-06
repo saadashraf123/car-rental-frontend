@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const Contact = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-
-
-
-
+    const [isHovered, setIsHovered] = useState(false);
     const typographyStyles = {
         color: "#000",
         opacity: "0.8",
@@ -17,7 +12,7 @@ const Contact = () => {
         fontFamily: "sans-serif",
         letterSpacing: "2px",
         alignText: "center",
-        
+
     }
     const textFieldStyles = {
         '& .MuiTextField-root': { m: 2, width: '100%', maxWidth: "100%", backgroundColor: "white", borderRadius: "3%", outline: "none", fontFamily: "sans-serif", margin: "2% 0" },
@@ -52,7 +47,7 @@ const Contact = () => {
         lineHeight: "8.5",
         margin: "10px auto", // Updated margin to "10px auto" to center the contact details horizontally
         textAlign: "center",
-        
+
     }
 
     return (
@@ -97,12 +92,14 @@ const Contact = () => {
 
                     <Grid item md={4} xs={10} >
 
-                        <Typography 
-                        sx={[typographyStyles, { opacity: "1", 
-                        marginLeft: "30%", 
-                        marginTop: '70px ' }]}
+                        <Typography
+                            sx={[typographyStyles, {
+                                opacity: "1",
+                                marginLeft: "30%",
+                                marginTop: '70px '
+                            }]}
 
-                         variant='h5'>   Contact Details </Typography>
+                            variant='h5'>   Contact Details </Typography>
 
                         <ListItem style={contactDetails}>
                             <Typography sx={[typographyStyles, { fontFamily: "sans-serif", opacity: "1", color: "#661f2b" }]} variant='subtitle2'>Email</Typography>
@@ -113,28 +110,28 @@ const Contact = () => {
 
                         <ListItem style={contactDetails}>
 
-                            <Typography 
-                            sx={[typographyStyles, {
-                                fontFamily: "sans-serif",
-                                 opacity: "1",
-                                  color : "#661f2b"
-                            }]} variant='subtitle2'>Phone</Typography>
+                            <Typography
+                                sx={[typographyStyles, {
+                                    fontFamily: "sans-serif",
+                                    opacity: "1",
+                                    color: "#661f2b"
+                                }]} variant='subtitle2'>Phone</Typography>
 
                             <Typography sx={typographyStyles} variant='subtitle2'>+92 000 0000000</Typography>
                             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faFacebook} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
-            </a>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faInstagram} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
-            </a>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faTwitter} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
-            </a>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faLinkedin} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
-            </a>
-        </div>
+                                <a href="" target="_blank" rel="noopener noreferrer">
+                                    <FontAwesomeIcon icon={faFacebook} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
+                                </a>
+                                <a href="" target="_blank" rel="noopener noreferrer">
+                                    <FontAwesomeIcon icon={faInstagram} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
+                                </a>
+                                <a href="" target="_blank" rel="noopener noreferrer">
+                                    <FontAwesomeIcon icon={faTwitter} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
+                                </a>
+                                <a href="" target="_blank" rel="noopener noreferrer">
+                                    <FontAwesomeIcon icon={faLinkedin} style={{ marginRight: '10px', fontSize: '30px', color: '#661f2b' }} />
+                                </a>
+                            </div>
 
                         </ListItem>
 
@@ -154,4 +151,4 @@ const Contact = () => {
     );
 };
 
-export default Contact;
+export default Contact;
