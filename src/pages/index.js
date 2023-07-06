@@ -19,3 +19,9 @@ export { default as Feedbacks } from "./Feedbacks";
 export { default as Settings } from "./Settings";
 
 export { default as AddCar } from "./AddCar"
+
+export { default as Layout } from "./Layout"
+
+export { default as VerifyCode } from "./VerifyCode"
+
+export { default as CreateNewPassword } from "./CreateNewPassword"
