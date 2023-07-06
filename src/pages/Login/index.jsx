@@ -1,12 +1,23 @@
 import React from 'react'
 import "./style.module.css"
-import { Grid, TextField, Button, Link, Paper, Typography, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Grid, TextField, createStyles, Paper, Typography, Box, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
+import { ButtonComponent } from '../../components';
 
 
 const Login = () => {
     const defaultTheme = createTheme();
+    const classes = createStyles({
+        extraStyles:
+        {
+            width: "100%",
+            maxWidth: 500,
+            p: 1,
+            mb: 2
+        }
+    });
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             email: '',
@@ -83,14 +94,15 @@ const Login = () => {
                             >
                                 Sign In
                             </Button>
+                            {/* <ButtonComponent variant={"contained"} text={"Sign In"} btnType={"submit"} extraStyles={classes.extraStyles} /> */}
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="/forgetpassword" variant="body2">
+                                    <Link to="/forgetpassword" variant="body2">
                                         Forgot password?
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/signup" variant="body2">
+                                    <Link to="/signup" variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

@@ -1,0 +1,12 @@
+.scrolled {
+    background-color: #DC3545 !important;
+    color: white !important;
+}
+
+.unScrolled {
+    color: #DC3545;
+}
+
+.icon:focus {
+    box-shadow: none;
+}

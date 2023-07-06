@@ -7,6 +7,7 @@ const Featured = () => {
         <>
             <p>Featured Section</p>
             <FeaturedItem />
+            <FeaturedItem />
         </>
     )
 }
