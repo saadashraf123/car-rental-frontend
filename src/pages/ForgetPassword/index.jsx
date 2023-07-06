@@ -62,7 +62,7 @@ const Forgetpassword = () => {
               variant="h3"
               sx={{ color: 'red', fontWeight: 'semi-bold', mx: -8 }}
             >
-              Car Rental System
+              Car Rental System by munir
             </Typography>
             <br />
             <br />
