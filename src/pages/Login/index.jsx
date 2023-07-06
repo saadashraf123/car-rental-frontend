@@ -1,6 +1,6 @@
 import React from 'react'
 import "./style.module.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Grid, TextField, createStyles, Paper, Typography, Box, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { ButtonComponent } from '../../components';
 
 const Login = () => {
     const defaultTheme = createTheme();
+    const navigate = useNavigate();
     const classes = createStyles({
         extraStyles:
         {
@@ -16,6 +17,29 @@ const Login = () => {
             maxWidth: 500,
             p: 1,
             mb: 2
+        },
+        textFieldStyles: {
+            '& label': {
+                color: '#DC3545',
+            },
+            '& label.Mui-focused': {
+                color: '#DC3545',
+            },
+            '& .MuiInput-underline:after': {
+                borderBottomColor: '#DC3545',
+            },
+            '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                    borderColor: '#DC3545',
+                },
+                '&:hover fieldset': {
+                    borderColor: '#DC3545',
+                    borderWidth: '0.15rem',
+                },
+                '&.Mui-focused fieldset': {
+                    borderColor: '#DC3545',
+                },
+            }
         }
     });
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -27,6 +51,7 @@ const Login = () => {
     const loginHandler = (data) => {
         console.log(data);
     }
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -68,7 +93,8 @@ const Login = () => {
                                 label="Email Address"
                                 name="email"
                                 {...register("email", { required: true })}
-                                autoFocus
+                                // autoFocus
+                                sx={classes.textFieldStyles}
                             />
                             {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
                             <TextField

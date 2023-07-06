@@ -8,21 +8,24 @@ import {
     Box,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom'
 
-const Forgetpassword = () => {
+
+const VerifyCode = () => {
     const defaultTheme = createTheme();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            email: '',
+            code: '',
         }
     });
     const loginHandler = (data) => {
         console.log(data);
-        navigate("/verifyCode")
+        navigate("/createNewPassword")
+
     }
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid style={{ marginTop: '104px' }} container component="main" sx={{ height: '100vh', justifyContent: 'center' }}>
@@ -43,27 +46,27 @@ const Forgetpassword = () => {
                                 Car Rental System
                             </Typography>
                             <Typography component="h1" variant="h6">
-                                Forgot Password
+                                Verify Code
                             </Typography>
                             <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 2 }}>
                                 <TextField
                                     margin="normal"
                                     fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
+                                    id="verificationCode"
+                                    label="Verification Code"
+                                    name="verificationCode"
                                     autoFocus
-                                    {...register("email", { required: true })}
-
+                                    {...register("code", { required: true })}
                                 />
-                                {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
+                                {errors.code?.type === 'required' && <p role="alert" className='text-danger'>*Verification Code is required</p>}
+
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
-                                    Get Verification Code
+                                    Verify Code
                                 </Button>
                             </Box>
                         </Box>
@@ -74,5 +77,5 @@ const Forgetpassword = () => {
     );
 };
 
-export default Forgetpassword;
+export default VerifyCode;
 
