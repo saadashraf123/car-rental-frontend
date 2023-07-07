@@ -1,7 +1,7 @@
 import React from 'react'
 import "./style.module.css"
-import { Link } from 'react-router-dom';
-import { Grid, TextField, createStyles, Paper, Typography, Box } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { Grid, TextField, createStyles, Paper, Typography, Box, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { ButtonComponent } from '../../components';
@@ -10,15 +10,48 @@ import { ButtonComponent } from '../../components';
 const Signup = () => {
 
     const classes = createStyles({
-        extraStyles:
+        ButtonStyles:
         {
-            width: "100%",
+            backgroundColor: "#DC3545",
+            color: "white",
+            width: '100%',
             maxWidth: 500,
+            fontWeight: "bold",
+            mt: 2,
+            mr: 1,
             p: 1,
-            mb: 2
+            mb: 2,
+            '&:hover': {
+                backgroundColor: 'white',
+                color: "#DC3545"
+            },
+        },
+        textFieldStyles: {
+            // '& label': {
+            //     color: '#DC3545',
+            // },
+            '& label.Mui-focused': {
+                color: '#DC3545',
+            },
+            '& .MuiInput-underline:after': {
+                borderBottomColor: '#DC3545',
+            },
+            '& .MuiOutlinedInput-root': {
+                // '& fieldset': {
+                //     borderColor: '#DC3545',
+                // },
+                '&:hover fieldset': {
+                    borderColor: '#DC3545',
+                    borderWidth: '0.15rem',
+                },
+                '&.Mui-focused fieldset': {
+                    borderColor: '#DC3545',
+                },
+            }
         }
     });
     const defaultTheme = createTheme();
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -30,6 +63,7 @@ const Signup = () => {
     );
     const signupHandler = (data) => {
         console.log(data);
+        navigate("/login")
     }
 
     return (
@@ -73,6 +107,7 @@ const Signup = () => {
                                 type="text"
                                 id="firstname"
                                 {...register("firstname", { required: true })}
+                                sx={classes.textFieldStyles}
 
                             />
                             {errors.firstname?.type === 'required' && <p role="alert" className='text-danger'>*First name is required</p>}
@@ -85,6 +120,7 @@ const Signup = () => {
                                 type="text"
                                 id="lastname"
                                 {...register("lastname", { required: true })}
+                                sx={classes.textFieldStyles}
                             />
                             {errors.lastname?.type === 'required' && <p className='text-danger' role="alert">*Last name is required</p>}
                             <TextField
@@ -94,8 +130,8 @@ const Signup = () => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoFocus
                                 {...register("email", { required: true })}
+                                sx={classes.textFieldStyles}
                             />
                             {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
                             <TextField
@@ -107,9 +143,18 @@ const Signup = () => {
                                 type="password"
                                 id="password"
                                 {...register("password", { required: true })}
+                                sx={classes.textFieldStyles}
                             />
                             {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
-                            <ButtonComponent variant={"contained"} text={"Sign up"} btnType={"submit"} extraStyles={classes.extraStyles} />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
+                            >
+                                Sign Up
+                            </Button>
+                            {/* <ButtonComponent variant={"contained"} text={"Sign up"} btnType={"submit"} extraStyles={classes.extraStyles} /> */}
                             <Grid container>
                                 <Grid item>
                                     <Link to="/login" variant="body2">

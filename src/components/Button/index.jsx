@@ -21,9 +21,9 @@ const ButtonComponent = (props) => {
             },
         }
     });
-    console.log(props.btnType);
+    console.log(props);
     return (
-        <Button type={props.btnType} variant={props.variant} size={props.size} component={Link} to={props.to} sx={[classes.ButtonStyles, props.extraStyles, props.scrolledStyles]} endIcon={props.icon}>{props.text}</Button>
+        <Button onClick={props.clickHandler} type={props.type} variant={props.variant} size={props.size} component={Link} to={props.to} sx={[classes.ButtonStyles, props.extraStyles, props.scrolledStyles]} endIcon={props.icon}>{props.text}</Button>
     )
 }
 
