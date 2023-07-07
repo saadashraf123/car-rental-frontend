@@ -53,24 +53,24 @@ const NavBar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="#search" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
+                            <a href="#search" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
                                 Find Car
-                            </Link>
+                            </a>
                         </li>
                         <li className="nav-item">
-                            <Link to="#about" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
+                            <a href="#about" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
                                 About
-                            </Link>
+                            </a>
                         </li>
                         <li className="nav-item">
-                            <Link to="#featured" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
+                            <a href="#featured" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
                                 Featured
-                            </Link>
+                            </a>
                         </li>
                         <li className="nav-item">
-                            <Link to="#contact" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
+                            <a href="#contact" className={`nav-link fw-bold ${scrolled ? "text-white" : "text-danger"}`} >
                                 Contact Us
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                     {loggedIn ?

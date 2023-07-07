@@ -15,3 +15,5 @@ export { default as Footer } from "./Footer";
 export { default as Reviews } from "./Reviews";
 
 export { default as ButtonComponent } from "./Button";
+
+export { default as CarsItem } from "./CarsItem";
