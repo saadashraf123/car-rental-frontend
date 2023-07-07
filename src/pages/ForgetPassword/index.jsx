@@ -47,13 +47,18 @@ const Forgetpassword = () => {
                             </Typography>
                             <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 2 }}>
                                 <TextField
-                                    margin="normal"
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoFocus
-                                    {...register("email", { required: true })}
+                                  margin="normal"
+                                  fullWidth
+                                  id="email"
+                                  label="Email Address"
+                                  name="email"
+                                  autoFocus
+                                  {...register("email", { required: true })}
+                                  className={errors.email?.type === 'required' ? 'error-input' : ''}
+                                  style={{
+                                      fontSize: '16px',
+                                      height: '48px',
+                                  }}
 
                                 />
                                 {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
