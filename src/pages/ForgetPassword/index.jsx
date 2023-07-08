@@ -97,7 +97,6 @@ const Forgetpassword = () => {
                                 autoFocus
                                 {...register("email", { required: true })}
                                 sx={classes.textFieldStyles}
-
                             />
                             {errors.email?.type === 'required' && <Typography role="alert" className='text-danger'>*Email Address is required</Typography>}
                             <Button
