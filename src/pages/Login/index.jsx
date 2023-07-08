@@ -11,17 +11,26 @@ const Login = () => {
     const defaultTheme = createTheme();
     const navigate = useNavigate();
     const classes = createStyles({
-        extraStyles:
+        ButtonStyles:
         {
-            width: "100%",
+            backgroundColor: "#DC3545",
+            color: "white",
+            width: '100%',
             maxWidth: 500,
+            fontWeight: "bold",
+            mt: 2,
+            mr: 1,
             p: 1,
-            mb: 2
+            mb: 2,
+            '&:hover': {
+                backgroundColor: 'white',
+                color: "#DC3545"
+            },
         },
         textFieldStyles: {
-            '& label': {
-                color: '#DC3545',
-            },
+            // '& label': {
+            //     color: '#DC3545',
+            // },
             '& label.Mui-focused': {
                 color: '#DC3545',
             },
@@ -29,9 +38,9 @@ const Login = () => {
                 borderBottomColor: '#DC3545',
             },
             '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                    borderColor: '#DC3545',
-                },
+                // '& fieldset': {
+                //     borderColor: '#DC3545',
+                // },
                 '&:hover fieldset': {
                     borderColor: '#DC3545',
                     borderWidth: '0.15rem',
@@ -48,8 +57,10 @@ const Login = () => {
             password: ''
         }
     });
+
     const loginHandler = (data) => {
         console.log(data);
+        navigate('/')
     }
 
 
@@ -106,6 +117,7 @@ const Login = () => {
                                 type="password"
                                 id="password"
                                 {...register("password", { required: true })}
+                                sx={classes.textFieldStyles}
                             />
                             {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
                             {/* <FormControlLabel
@@ -116,11 +128,11 @@ const Login = () => {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
                             >
                                 Sign In
                             </Button>
-                            {/* <ButtonComponent variant={"contained"} text={"Sign In"} btnType={"submit"} extraStyles={classes.extraStyles} /> */}
+                            {/* <ButtonComponent type="submit" variant={"contained"} text={"Sign In"} extraStyles={classes.extraStyles} /> */}
                             <Grid container>
                                 <Grid item xs>
                                     <Link to="/forgetpassword" variant="body2">
