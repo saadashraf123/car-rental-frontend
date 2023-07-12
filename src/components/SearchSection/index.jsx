@@ -16,7 +16,7 @@ const SearchSection = () => {
         }
     });
     return (
-        <Container sx={{ mx: 'auto' }}>
+        <Container sx={{ mx: 'auto' }} id="search">
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column'

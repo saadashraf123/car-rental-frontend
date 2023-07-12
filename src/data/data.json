@@ -1,0 +1,41 @@
+{
+    "cars":[
+        {
+            "name":"Toyota Corolla Altis",
+            "model":"2017",
+            "variant": "Automatic 1.6",
+            "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
+            "imageUrl":[
+                "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
+            ],
+            "price": "1000",
+            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+        },
+        {
+            "name":"Toyota Vitz",
+            "model":"2012",
+            "variant": "Automatic 1.3",
+            "location":"Saad Ashraf, Gulshan-e-iqbal, Karachi",
+            "imageUrl":[
+                "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
+            ],
+            "price": "2000",
+            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+        },
+        {
+            "name":"Toyota Corolla Altis",
+            "model":"2017",
+            "variant": "Automatic 1.6",
+            "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
+            "imageUrl":[
+                "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
+            ],
+            "price": "1000",
+            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+        }
+    ],
+    "colrs":{
+        "name":"red",
+        "model":"2019"
+    }
+}
