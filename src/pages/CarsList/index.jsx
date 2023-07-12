@@ -2,9 +2,11 @@ import React from 'react'
 import "./style.module.css"
 import { Typography, Paper, Box, Grid, createTheme, ThemeProvider, Button } from '@mui/material'
 import { CarsItem } from '../../components';
+import cars from '../../data/data.json'
 
 const CarsList = () => {
     const defaultTheme = createTheme();
+    const data = cars.cars
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid style={{ marginTop: '10px' }} container sx={{ height: '100%', justifyContent: 'center' }}>
@@ -16,16 +18,9 @@ const CarsList = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <Typography
-                            component="h1"
-                            variant="h5"
-                            sx={{ color: 'red', fontWeight: 'bold' }}
-                        >
-                            Cars List
-                        </Typography>
-                        <CarsItem />
-                        <CarsItem />
-                        <CarsItem />
+                        {data.map((item, index) => (
+                            <CarsItem key={index} data={item} />
+                        ))}
                     </Box>
                 </Paper>
             </Grid>

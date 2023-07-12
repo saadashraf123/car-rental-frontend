@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./style.module.css"
 import { Link } from 'react-router-dom';
 import { FaCarSide } from 'react-icons/fa';
@@ -10,11 +10,13 @@ import { createStyles } from '@mui/material'
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false)
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(true)
+
     window.onscroll = function () {
         if (window.pageYOffset > 0) {
             setScrolled(true)
-        } else {
+        }
+        else {
             setScrolled(false)
         }
     }

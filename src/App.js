@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { AddCar, CarDetails, CarsList, CreateNewPassword, Feedbacks, ForgetPassword, Home, Login, MyBookings, MyCars, Settings, Signup, VerifyCode,UpdateUserProfile } from "./pages";
+import { AddCar, CarDetails, CarsList, CreateNewPassword, Feedbacks, ForgetPassword, Home, Login, MyBookings, MyCars, Settings, Signup, VerifyCode, UpdateUserProfile } from "./pages";
 import { Layout } from "./pages";
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
                     <Route path="/mycars" element={<MyCars />} />
                     <Route path="/feedbacks" element={<Feedbacks />} />
                     <Route path="/settings" element={<Settings />} />
-                    <Route path="/addcar" element={<AddCar />} />
-                    <Route path="/UpdateUserProfile" element={<UpdateUserProfile/>} />
-                   
-                    
+                <Route path="/addcar" element={<AddCar />} />
+                    <Route path="/UpdateUserProfile" element={<UpdateUserProfile />} />
+
+
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />

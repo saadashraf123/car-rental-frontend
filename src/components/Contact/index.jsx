@@ -52,7 +52,7 @@ const Contact = () => {
 
     return (
         <div id="contact" className="contact">
-            <Typography align='center' sx={[typographyStyles, { fontFamily: "sans-serif", opacity: "1" }]} variant='h5'>Get<b className='bold'>In Touch</b></Typography>
+            <Typography align='center' sx={[typographyStyles, { fontFamily: "sans-serif", opacity: "1" }]} variant='h5'>Get<b className='bold'> In Touch</b></Typography>
             <hr style={{ background: "#cc1836", margin: "0px 40% 5% 40%" }}></hr>
             <Container style={{ backgroundColor: 'white', marginBottom: '80px', boxShadow: '0 0 20px rgba(0, 0, 0, 0.2)', borderRadius: '5px' }} maxWidth="lg" >
                 <Grid container spacing={2} columns={10}>
