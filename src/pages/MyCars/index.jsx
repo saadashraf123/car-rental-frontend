@@ -3,6 +3,7 @@ import "./style.module.css"
 import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
 import { CarsItem } from '../../components';
 import useFetch from '../../Hooks/useFetch';
+import carsData from '../../data/data.json'
 
 const MyCars = () => {
     const defaultTheme = createTheme();
@@ -17,7 +18,8 @@ const MyCars = () => {
     };
 
     const { data, error, loading } = useFetch(url);
-    const result = data?.car
+    // const result = data?.car
+    const result = carsData?.cars
 
     return (
         <ThemeProvider theme={defaultTheme}>

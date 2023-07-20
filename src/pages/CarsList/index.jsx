@@ -4,7 +4,7 @@ import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
 import { CarsItem } from '../../components';
 import { useLocation } from "react-router-dom";
 import useFetch from '../../Hooks/useFetch';
-
+import carData from '../../data/data.json'
 
 const CarsList = () => {
     const defaultTheme = createTheme();
@@ -27,7 +27,8 @@ const CarsList = () => {
     };
 
     const { data, error, loading } = useFetch(url);
-    const result = data?.cars
+    // const result = data?.cars
+    const result = carData?.cars;
 
     return (
         <ThemeProvider theme={defaultTheme}>
