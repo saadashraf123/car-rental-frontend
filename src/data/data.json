@@ -3,7 +3,7 @@
         {
             "name":"Toyota Corolla Altis",
             "model":"2017",
-            "variant": "Automatic 1.6",
+            "category": "SUV",
             "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
             "imageUrl":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
@@ -14,7 +14,7 @@
         {
             "name":"Toyota Vitz",
             "model":"2012",
-            "variant": "Automatic 1.3",
+            "category": "SUV",
             "location":"Saad Ashraf, Gulshan-e-iqbal, Karachi",
             "imageUrl":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
@@ -25,7 +25,7 @@
         {
             "name":"Toyota Corolla Altis",
             "model":"2017",
-            "variant": "Automatic 1.6",
+            "category": "SUV",
             "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
             "imageUrl":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
@@ -37,5 +37,83 @@
     "colrs":{
         "name":"red",
         "model":"2019"
-    }
+    },
+    "carsComapny":[
+        "Acura",
+        "Alfa-Romeo",
+        "Aston Martin",
+        "Audi",
+        "BMW",
+        "Bentley",
+        "Buick",
+        "Cadilac",
+        "Chevrolet",
+        "Chrysler",
+        "Daewoo",
+        "Daihatsu",
+        "Dodge",
+        "Eagle",
+        "Ferrari",
+        "Fiat",
+        "Fisker",
+        "Ford",
+        "Freighliner",
+        "GMC - General Motors Company",
+        "Genesis",
+        "Geo",
+        "Honda",
+        "Hummer",
+        "Hyundai",
+        "Infinity",
+        "Isuzu",
+        "Jaguar",
+        "Jeep",
+        "Kia",
+        "Lamborghini",
+        "Land Rover",
+        "Lexus",
+        "Lincoln",
+        "Lotus",
+        "Mazda",
+        "Maserati",
+        "Maybach",
+        "McLaren",
+        "Mercedez-Benz",
+        "Mercury",
+        "Mini",
+        "Mitsubishi",
+        "Nissan",
+        "Oldsmobile",
+        "Panoz",
+        "Plymouth",
+        "Polestar",
+        "Pontiac",
+        "Porsche",
+        "Ram",
+        "Rivian",
+        "Rolls_Royce",
+        "Saab",
+        "Saturn",
+        "Smart",
+        "Subaru",
+        "Susuki",
+        "Tesla",
+        "Toyota",
+        "Volkswagen",
+        "Volvo",
+        "Vitz",
+        "Corolla"
+    ],
+    "carsCategory":[
+        "SUV",
+        "Sedan",
+        "Coupe",
+        "Convertible",
+        "Hatchback",
+        "Pickup",
+        "Van",
+        "Minivan",
+        "Wagon"
+    ]
+
 }
