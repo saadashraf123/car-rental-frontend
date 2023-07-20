@@ -1,37 +1,37 @@
 {
     "cars":[
         {
-            "name":"Toyota Corolla Altis",
-            "model":"2017",
-            "category": "SUV",
-            "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
-            "imageUrl":[
+            "car_name":"Toyota Corolla Altis",
+            "car_model":"2017",
+            "car_category": "SUV",
+            "car_location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
+            "car_image":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
             ],
             "price": "1000",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+            "car_description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
         },
         {
-            "name":"Toyota Vitz",
-            "model":"2012",
-            "category": "SUV",
-            "location":"Saad Ashraf, Gulshan-e-iqbal, Karachi",
-            "imageUrl":[
+            "car_name":"Toyota Vitz",
+            "car_model":"2012",
+            "car_category": "SUV",
+            "car_location":"Saad Ashraf, Gulshan-e-iqbal, Karachi",
+            "car_image":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
             ],
             "price": "2000",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+            "car_description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
         },
         {
-            "name":"Toyota Corolla Altis",
-            "model":"2017",
-            "category": "SUV",
-            "location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
-            "imageUrl":[
+            "car_name":"Toyota Corolla Altis",
+            "car_model":"2017",
+            "car_category": "SUV",
+            "car_location":"Saad Ashraf, Gulistan-e-Johar, Karachi",
+            "car_image":[
                 "https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars","https://source.unsplash.com/random?cars"
             ],
             "price": "1000",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
+            "car_description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore sed dolores eaque cumque aliquid? Veniam impedit sunt exercitationem soluta, molestiae dignissimos quisquam. Laborum, architecto? Fugit laborum eveniet repellendus ratione consectetur?"
         }
     ],
     "colrs":{
