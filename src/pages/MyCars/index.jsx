@@ -1,9 +1,9 @@
 import React from 'react'
 import "./style.module.css"
 import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
-import { CarsItem } from '../../components';
 import useFetch from '../../Hooks/useFetch';
 import carsData from '../../data/data.json'
+import MyCarsItem from '../../components/MyCarsItem';
 
 const MyCars = () => {
     const defaultTheme = createTheme();
@@ -33,7 +33,7 @@ const MyCars = () => {
                         }}
                     >
                         {result?.map((item, index) => (
-                            <CarsItem key={index} data={item} />
+                            <MyCarsItem key={index} data={item} />
                         ))}
                     </Box>
                 </Paper>
