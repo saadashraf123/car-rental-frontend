@@ -3,7 +3,7 @@ import "./style.module.css"
 import { Link } from 'react-router-dom';
 import { Typography, Paper, Grid, Button, createStyles } from '@mui/material'
 
-const CarsItem = ({ data }) => {
+const BookingItem = ({ data }) => {
     const classes = createStyles({
         ButtonStyles:
         {
@@ -67,4 +67,4 @@ const CarsItem = ({ data }) => {
     )
 }
 
-export default CarsItem
+export default BookingItem

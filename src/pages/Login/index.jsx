@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.module.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { Grid, TextField, createStyles, Paper, Typography, Box, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { ButtonComponent } from '../../components';
+import useFetch from '../../Hooks/useFetch';
 
 
 const Login = () => {
+    const [credentials, setCredentials] = useState(null)
     const defaultTheme = createTheme();
     const navigate = useNavigate();
     const classes = createStyles({
@@ -58,11 +60,33 @@ const Login = () => {
         }
     });
 
-    const loginHandler = (data) => {
-        console.log(data);
-        navigate('/')
-    }
+    const url = {
+        method: 'POST',
+        url: `auth/login`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+        data: credentials,
+    };
 
+    const { data, error, loading, fetchApi } = useFetch(url)
+
+    useEffect(() => {
+        localStorage.setItem("token", data?.token)
+    }, [data?.token])
+
+    console.log(data);
+
+    const loginHandler = (data) => {
+        setCredentials(data)
+        // navigate('/')
+    }
+    useEffect(() => {
+        if (credentials) {
+            fetchApi(url)
+        }
+    }, [credentials])
 
     return (
         <ThemeProvider theme={defaultTheme}>

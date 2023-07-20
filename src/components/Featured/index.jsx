@@ -2,10 +2,12 @@ import React from 'react';
 import "./style.module.css";
 import { Typography } from '@mui/material';
 import FeaturedItem from '../FeaturedItem';
-import cars from '../../data/data.json'
+import useFetch from '../../Hooks/useFetch';
 
 const Featured = () => {
-    const data = cars.cars
+    const { data, loading, error } = useFetch("cars", "");
+    const carData = data?.cars
+    console.log(carData);
 
     const typographyStyles = {
         color: "#000",
@@ -27,9 +29,13 @@ const Featured = () => {
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <div class="row">
-                                            {data.map((item, index) => (
-                                                <FeaturedItem key={index} data={item} />
-                                            ))}
+                                            {loading ? <div className="loader">{error}</div> :
+                                                carData?.map((item, index) => (
+                                                    <>
+                                                        <FeaturedItem key={index} data={item} />
+                                                    </>
+                                                ))
+                                            }
                                         </div>
                                     </div>
                                 </div>
