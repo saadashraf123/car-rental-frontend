@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Grid,
     TextField,
@@ -10,6 +10,7 @@ import {
 import { createStyles, createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
+import useFetch from '../../Hooks/useFetch';
 
 const Forgetpassword = () => {
     const defaultTheme = createTheme();
@@ -62,10 +63,32 @@ const Forgetpassword = () => {
             email: '',
         }
     });
+    const [credentials, setCredentials] = useState(null)
     const loginHandler = (data) => {
-        console.log(data);
-        navigate("/verifyCode")
+        setCredentials(data)
     }
+    const { data, error, loading, fetchApi } = useFetch()
+
+    const url = {
+        method: 'POST',
+        url: `auth/reset-password`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+        data: credentials,
+    };
+
+    useEffect(() => {
+        if (credentials) {
+            fetchApi(url)
+                .then(() => {
+                    alert("Email Sent Successfully")
+                    navigate("/login")
+                })
+        }
+    }, [credentials])
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid style={{ marginTop: '100px' }} container sx={{ height: '100%', justifyContent: 'center' }}>
@@ -105,7 +128,7 @@ const Forgetpassword = () => {
                                 variant="contained"
                                 sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
                             >
-                                Get Verification Code
+                                Get Verification Link
                             </Button>
                         </Box>
                     </Box>

@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./style.module.css";
 import { Typography } from '@mui/material';
 import FeaturedItem from '../FeaturedItem';
 import useFetch from '../../Hooks/useFetch';
 
 const Featured = () => {
-    const { data, loading, error } = useFetch("cars", "");
+    const url = {
+        method: 'GET',
+        url: `cars`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+    };
+    const { data, loading, error, fetchApi } = useFetch();
+
+    useEffect(() => {
+        fetchApi(url)
+    }, [])
+
     const carData = data?.cars
-    console.log(carData);
 
     const typographyStyles = {
         color: "#000",

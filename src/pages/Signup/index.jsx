@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.module.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { Grid, TextField, createStyles, Paper, Typography, Box, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
-import { ButtonComponent } from '../../components';
+import useFetch from '../../Hooks/useFetch';
+import { BsDatabaseDown } from 'react-icons/bs';
+
 
 
 const Signup = () => {
@@ -51,20 +53,47 @@ const Signup = () => {
         }
     });
     const defaultTheme = createTheme();
+    const [credentials, setCredentials] = useState(null)
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            firstName: '',
+            firstname: '',
             lastname: '',
             email: '',
+            phone: "",
             password: ''
         }
     }
     );
+
+
+    const url = {
+        method: 'POST',
+        url: `user`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+        data: credentials,
+    };
+
+    const { data, error, loading, fetchApi } = useFetch()
+
     const signupHandler = (data) => {
-        console.log(data);
-        navigate("/login")
+        setCredentials(data)
     }
+    useEffect(() => {
+        if (credentials) {
+            fetchApi(url)
+        }
+    }, [credentials])
+
+    useEffect(() => {
+        if (data?.user.affectedRows == 1) {
+            navigate("/")
+        }
+    }, [data])
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -108,7 +137,6 @@ const Signup = () => {
                                 id="firstname"
                                 {...register("firstname", { required: true })}
                                 sx={classes.textFieldStyles}
-
                             />
                             {errors.firstname?.type === 'required' && <p role="alert" className='text-danger'>*First name is required</p>}
                             <TextField
@@ -134,6 +162,19 @@ const Signup = () => {
                                 sx={classes.textFieldStyles}
                             />
                             {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
+                            <TextField
+                                margin="normal"
+                                type='number'
+                                placeholder='03xxxxxxxxx'
+                                // required
+                                fullWidth
+                                id="phone"
+                                label="Phone Number"
+                                name="phone"
+                                {...register("phone", { required: true })}
+                                sx={classes.textFieldStyles}
+                            />
+                            {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Phone Number is required</p>}
                             <TextField
                                 margin="normal"
                                 // required

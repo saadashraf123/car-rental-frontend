@@ -78,6 +78,7 @@ const SearchSection = () => {
                             <MenuItem value={item}>{item}</MenuItem>
                         ))}
                     </TextField>
+                    {errors.car_name?.type === 'required' && <p role="alert" className='text-danger'>*Car Name is required</p>}
                     <TextField
                         label="Car Category"
                         variant="outlined"
@@ -91,6 +92,8 @@ const SearchSection = () => {
                             <MenuItem value={item}>{item}</MenuItem>
                         ))}
                     </TextField>
+                    {errors.car_category?.type === 'required' && <p role="alert" className='text-danger'>*Car Category is required</p>}
+
                 </Grid>
                 <Grid item container
                     direction="row"
@@ -106,9 +109,10 @@ const SearchSection = () => {
                         sx={classes.textInputStyles}
                     >
                     </TextField>
+                    {errors.car_model?.type === 'required' && <p role="alert" className='text-danger'>*Car Model is required</p>}
                     <TextField
                         // type="date"
-                        label="Select Date 1"
+                        label="Enter Location"
                         variant="outlined"
                         InputLabelProps={{
                             shrink: true,
@@ -118,6 +122,7 @@ const SearchSection = () => {
                         {...register("car_location", { required: true })}
                         sx={classes.textInputStyles}
                     />
+                    {errors.car_location?.type === 'required' && <p role="alert" className='text-danger'>*Car Location is required</p>}
                 </Grid>
                 <Grid
                     sx={{

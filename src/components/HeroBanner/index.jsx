@@ -55,8 +55,8 @@ const HeroBanner = () => {
                                 flexible pick-up options and much more.
                             </Typography>
                             <Box>
-                                <ButtonComponent text={"Book Car"} variant={"contained"} size={"medium"} to={"/details"} icon={<BsCheckCircleFill />} />
-                                <ButtonComponent text={"Learn More"} variant={"contained"} size={"medium"} to={"/details"} extraStyles={classes.ExtraStyles} icon={<BiSolidRightArrowCircle />} />
+                                <ButtonComponent text={"Book Car"} variant={"contained"} to={"#search"} size={"medium"} icon={<BsCheckCircleFill />} />
+                                <ButtonComponent text={"Learn More"} variant={"contained"} size={"medium"} to={"#about"} extraStyles={classes.ExtraStyles} icon={<BiSolidRightArrowCircle />} />
                             </Box>
                         </Box>
                     </Grid>

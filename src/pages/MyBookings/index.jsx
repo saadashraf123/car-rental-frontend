@@ -1,46 +1,85 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./style.module.css"
-import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
+// import { Paper, Box, Grid, createTheme, ThemeProvider , Button } from '@mui/material'
+import { Paper, Box, Grid, createTheme, ThemeProvider, Tab, Tabs } from '@mui/material';
+
 import useFetch from '../../Hooks/useFetch';
 import BookingItem from '../../components/BookingItem';
 import carsData from '../../data/data.json'
+import { useStateContext } from '../../Contexts/stateContext';
 
 const MyBookings = () => {
     const defaultTheme = createTheme();
-    const id = 3
+    const [currentTab, setCurrentTab] = useState(0);
+    const { user } = useStateContext();
+    const id = user?.user_id
     const url = {
         method: 'GET',
-        url: `booking/myBookings/${id}`,
+        url: `booking/${currentTab == 0 ? `myBookings/${id}` : (currentTab == 1 ? `myOrders/${id}` : `pendingOrders/${id}`)}`,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         }
     };
 
-    const { data, error, loading } = useFetch(url);
-    // const result = data?.bookings
-    const result = carsData?.cars
-    console.log(result);
+    const { data, error, loading, fetchApi } = useFetch();
+    const result = data?.bookings
+
+    useEffect(() => {
+        fetchApi(url)
+    }, [currentTab])
+
+    const handleChangeTab = (event, newValue) => {
+        setCurrentTab(newValue);
+    };
+
+
+
+    // Define custom styles for the tabs
+    const tabStyle = {
+        '&.Mui-selected': {
+            color: 'white',
+            backgroundColor: '#DC3545',
+        },
+        '&:hover': {
+            color: '#DC3545',
+            backgroundColor: 'white',
+        },
+    };
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid style={{ marginTop: '10px' }} container sx={{ height: '100%', justifyContent: 'center' }}>
                 <Paper elevation={6} square sx={{ p: 4, width: "90%" }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
+
+                    {/* Two tabs */}
+
+                    <Tabs value={currentTab} onChange={handleChangeTab} indicatorColor="none">
+
+                        <Tab label="My Bookings" sx={tabStyle} />
+
+
+                        <Tab label="My orders" style={{ marginLeft: '20px' }} sx={tabStyle} />
+
+                        <Tab label="Pending Orders" style={{ marginLeft: '20px' }} sx={tabStyle} />
+
+
+                    </Tabs>
+
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         {result?.map((item, index) => (
-                            <BookingItem key={index} data={item} />
+                            <BookingItem
+                                key={index}
+                                data={item}
+                                isPendingOrder={currentTab === 2}
+                            />
                         ))}
                     </Box>
                 </Paper>
             </Grid>
-        </ThemeProvider >
-    )
-}
+        </ThemeProvider>
+    );
+};
 
 export default MyBookings

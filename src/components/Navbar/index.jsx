@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./style.module.css"
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaCarSide } from 'react-icons/fa';
 import { RxAvatar } from 'react-icons/rx';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconButton } from '@mui/material'
 import ButtonComponent from '../Button';
 import { createStyles } from '@mui/material'
+import { useStateContext } from '../../Contexts/stateContext';
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false)
-    const [loggedIn, setLoggedIn] = useState(true)
-
+    const { user } = useStateContext();
+    const navigate = useNavigate()
     window.onscroll = function () {
         if (window.pageYOffset > 0) {
             setScrolled(true)
@@ -37,6 +38,11 @@ const NavBar = () => {
             },
         }
     });
+    const logoutHandler = () => {
+        localStorage.removeItem("token")
+        window.location.reload();
+    }
+
     return (
         <nav className={`navbar sticky-top navbar-expand-lg ${scrolled ? styles.scrolled : "bg-white"}`} >
             <div className="container-fluid">
@@ -75,7 +81,7 @@ const NavBar = () => {
                             </a>
                         </li>
                     </ul>
-                    {loggedIn ?
+                    {user ?
                         <div className="navbar-nav nav-item dropdown">
                             <a className={`nav-link dropdown-toggle ${scrolled ? "text-white" : "text-danger"}`} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <RxAvatar className='fs-1' />
@@ -98,7 +104,7 @@ const NavBar = () => {
                                 </li>
                                 <li>
                                     <Link to="/feedbacks" className='dropdown-item' >
-                                        Reviews
+                                        Feedbacks
                                     </Link>
                                 </li>
                                 <li><hr className="dropdown-divider" /></li>
@@ -108,7 +114,7 @@ const NavBar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/" className='dropdown-item' >
+                                    <Link onClick={logoutHandler} className='dropdown-item' >
                                         Logout
                                     </Link>
                                 </li>

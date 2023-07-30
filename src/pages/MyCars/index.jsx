@@ -1,25 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./style.module.css"
 import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
 import useFetch from '../../Hooks/useFetch';
 import carsData from '../../data/data.json'
 import MyCarsItem from '../../components/MyCarsItem';
+import { useStateContext } from '../../Contexts/stateContext';
 
 const MyCars = () => {
     const defaultTheme = createTheme();
-    const id = 1
+
+    const { user } = useStateContext()
     const url = {
         method: 'GET',
-        url: `cars/myCars/${id}`,
+        url: `cars/myCars/${user?.user_id}`,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         }
     };
 
-    const { data, error, loading } = useFetch(url);
-    // const result = data?.car
-    const result = carsData?.cars
+    const { data, error, loading, fetchApi } = useFetch();
+    const result = data?.car
+
+    useEffect(() => {
+        fetchApi(url)
+    }, [])
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -33,7 +38,7 @@ const MyCars = () => {
                         }}
                     >
                         {result?.map((item, index) => (
-                            <MyCarsItem key={index} data={item} />
+                            <MyCarsItem key={index} carData={item} />
                         ))}
                     </Box>
                 </Paper>

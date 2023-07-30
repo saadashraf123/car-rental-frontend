@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./style.module.css"
 import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
 import { CarsItem } from '../../components';
 import { useLocation } from "react-router-dom";
 import useFetch from '../../Hooks/useFetch';
-import carData from '../../data/data.json'
+import { useStateContext } from '../../Contexts/stateContext';
 
 const CarsList = () => {
     const defaultTheme = createTheme();
-
+    const { user } = useStateContext();
     const location = useLocation();
     const { car_name, car_category, car_model, car_location } = location.state;
 
@@ -19,16 +19,14 @@ const CarsList = () => {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         }
-        // data: [
-        //     {
-        //         Text: 'Ich würde wirklich gern Ihr Auto um den Block fahren ein paar Mal.',
-        //     },
-        // ],
     };
 
-    const { data, error, loading } = useFetch(url);
-    // const result = data?.cars
-    const result = carData?.cars;
+    const { data, error, loading, fetchApi } = useFetch();
+    const result = data?.cars
+
+    useEffect(() => {
+        fetchApi(url)
+    }, [])
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -42,6 +40,8 @@ const CarsList = () => {
                         }}
                     >
                         {result?.map((item, index) => (
+                            user.user_id !== item.user_id
+                            &&
                             <CarsItem key={index} data={item} />
                         ))}
                     </Box>

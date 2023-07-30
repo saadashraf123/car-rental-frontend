@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, ListItem, Typography, Box, TextField, Button, Container } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { useForm } from "react-hook-form";
+import useFetch from "../../Hooks/useFetch";
+import { useStateContext } from "../../Contexts/stateContext";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -49,6 +53,49 @@ const Contact = () => {
         textAlign: "center",
 
     }
+    const { user } = useStateContext()
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            name: user?.firstName,
+            email: user?.email,
+            phone: user?.phone,
+            message: ''
+        }
+    });
+    const [credentials, setCredentials] = useState(null)
+
+    const url = {
+        method: 'POST',
+        url: `user/contact/${user?.user_id}`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+        data: { message: credentials },
+    };
+
+    const { error, loading, fetchApi } = useFetch()
+    const navigate = useNavigate()
+    const contactHandler = (data) => {
+        if (user) {
+            setCredentials(data.message)
+        }
+        else {
+            navigate("/login")
+        }
+    }
+
+    useEffect(() => {
+        if (credentials) {
+            fetchApi(url)
+                .then((result) => {
+                    window.location.reload()
+                }).catch((err) => {
+                    alert(err)
+                });
+        }
+    }, [credentials])
+
 
     return (
         <div id="contact" className="contact">
@@ -61,30 +108,47 @@ const Contact = () => {
                         <Box
                             component="form"
                             sx={textFieldStyles}
-                            noValidate
                             autoComplete="off"
+                            onSubmit={handleSubmit(contactHandler)}
                         >
                             <div>
                                 <TextField
-                                    required
+                                    id="name"
                                     label="Your Name"
+                                    name="name"
+                                    disabled={user ? true : false}
+                                    {...register("name", { required: true })}
                                 />
+                                {errors.name?.type === 'required' && <p role="alert" className='text-danger'>*Name is required</p>}
                                 <TextField
-                                    required
-                                    label="Your Email"
+                                    id="email"
+                                    label="Your Email Address"
+                                    name="email"
+                                    type="email"
+                                    disabled={user ? true : false}
+                                    {...register("email", { required: true })}
                                 />
+                                {errors.email?.type === 'required' && <p role="alert" className='text-danger'>*Email Address is required</p>}
                                 <TextField
-                                    required
-                                    label="Your Phone"
+                                    id="phone"
+                                    label="Your Phone Number"
+                                    name="phone"
+                                    type="number"
+                                    disabled={user ? true : false}
+                                    {...register("phone", { required: true })}
                                 />
+                                {errors.phone?.type === 'required' && <p role="alert" className='text-danger'>*Phone Number is required</p>}
                                 <TextField
-                                    required
+                                    id="message"
                                     label="Your Message"
+                                    name="message"
                                     multiline
+                                    {...register("message", { required: true })}
                                     rows={4}
                                 />
+                                {errors.message?.type === 'required' && <p role="alert" className='text-danger'>*Message is required</p>}
                             </div>
-                            <Button sx={btnStyles}>Send Message</Button>
+                            <Button type="submit" sx={btnStyles}>Send Message</Button>
                             <div style={{ marginTop: '30px' }}></div>
                         </Box>
                     </Grid>
