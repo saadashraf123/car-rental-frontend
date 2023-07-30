@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { ButtonComponent } from '../../components';
 import useFetch from '../../Hooks/useFetch';
+import { useStateContext } from '../../Contexts/stateContext';
 
 
 const Login = () => {
@@ -30,9 +31,6 @@ const Login = () => {
             },
         },
         textFieldStyles: {
-            // '& label': {
-            //     color: '#DC3545',
-            // },
             '& label.Mui-focused': {
                 color: '#DC3545',
             },
@@ -40,9 +38,6 @@ const Login = () => {
                 borderBottomColor: '#DC3545',
             },
             '& .MuiOutlinedInput-root': {
-                // '& fieldset': {
-                //     borderColor: '#DC3545',
-                // },
                 '&:hover fieldset': {
                     borderColor: '#DC3545',
                     borderWidth: '0.15rem',
@@ -70,17 +65,19 @@ const Login = () => {
         data: credentials,
     };
 
-    const { data, error, loading, fetchApi } = useFetch(url)
+    const { setUser } = useStateContext()
+    const { data, error, loading, fetchApi } = useFetch()
 
     useEffect(() => {
-        localStorage.setItem("token", data?.token)
+        if (data) {
+            localStorage.setItem("token", data?.token)
+            setUser(data?.user)
+            navigate('/')
+        }
     }, [data?.token])
-
-    console.log(data);
 
     const loginHandler = (data) => {
         setCredentials(data)
-        // navigate('/')
     }
     useEffect(() => {
         if (credentials) {
@@ -148,6 +145,7 @@ const Login = () => {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             /> */}
+                            {error && <p role="alert" className='text-danger'>{error?.response.data.message}</p>}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -156,7 +154,6 @@ const Login = () => {
                             >
                                 Sign In
                             </Button>
-                            {/* <ButtonComponent type="submit" variant={"contained"} text={"Sign In"} extraStyles={classes.extraStyles} /> */}
                             <Grid container>
                                 <Grid item xs>
                                     <Link to="/forgetpassword" variant="body2">

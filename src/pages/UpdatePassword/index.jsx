@@ -11,9 +11,10 @@ import { createTheme, ThemeProvider, createStyles } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useFetch from '../../Hooks/useFetch';
+import { useStateContext } from '../../Contexts/stateContext';
 
 
-const CreateNewPassword = () => {
+const UpdatePassword = () => {
 
     const params = useParams();
     const defaultTheme = createTheme();
@@ -61,40 +62,55 @@ const CreateNewPassword = () => {
     })
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            confirmPassword: '',
-            password: ''
+            currentPass: '',
+            password: '',
+            confirmPass: ''
         }
     });
     const [credentials, setCredentials] = useState(null)
     const { data, fetchApi } = useFetch();
+    const { user } = useStateContext();
     const url = {
         method: 'POST',
-        url: `user/updatePassword`,
+        url: `user/verify/${user?.user_id}`,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            'Authorization': `Bearer ${params.token}`
+        },
+        data: { password: credentials?.currentPass }
+    };
+
+    const updateUrl = {
+        method: 'PATCH',
+        url: `user/${user?.user_id}`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
         data: { password: credentials?.password }
     };
-    const loginHandler = (data) => {
-        if (data.password === data.confirmPassword) {
-            setCredentials(data)
-            alert("Password Reset Successfully")
-        }
-        else {
-            alert("Password and Confirm Password Must Be Same")
-        }
-
+    const updateHandler = (data) => {
+        setCredentials(data)
     }
 
     useEffect(() => {
         fetchApi(url)
-        // .then(() => {
-        //     alert("Password Reset Successfully! Go back to Log in Page")
-        //     // navigate("/")
-        // })
     }, [credentials])
+
+
+    useEffect(() => {
+        if (data?.flag === 1) {
+            if (credentials.password === credentials.confirmPass) {
+                fetchApi(updateUrl)
+                alert("Password Updated Successfully")
+                navigate("/")
+            }
+            else {
+                alert("New Password and Confirm New Password Must be Same")
+            }
+        }
+    }, [data])
+
 
 
     return (
@@ -120,16 +136,16 @@ const CreateNewPassword = () => {
                             <Typography component="h1" variant="h6">
                                 Create New Password
                             </Typography>
-                            <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 2 }}>
+                            <Box component="form" onSubmit={handleSubmit(updateHandler)} sx={{ mt: 2 }}>
                                 <TextField
                                     margin="normal"
                                     fullWidth
                                     type="password"
                                     id="password"
-                                    label="New Password"
-                                    name="password"
+                                    label="Current Password"
+                                    name="currentPass"
                                     autoFocus
-                                    {...register("password", { required: true })}
+                                    {...register("currentPass", { required: true })}
                                     sx={classes.textFieldStyles}
                                 />
                                 {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*Password is required</p>}
@@ -138,21 +154,31 @@ const CreateNewPassword = () => {
                                     margin="normal"
                                     fullWidth
                                     type="password"
-                                    id="confirmPassword"
-                                    label="Confirm Password"
-                                    name="confirmPassword"
-                                    {...register("confirmPassword", { required: true })}
+                                    id="password"
+                                    label="New Password"
+                                    name="password"
+                                    {...register("password", { required: true })}
                                     sx={classes.textFieldStyles}
                                 />
-                                {errors.confirmPassword?.type === 'required' && <p role="alert" className='text-danger'>*Confirm Password is required</p>}
-
+                                {errors.password?.type === 'required' && <p role="alert" className='text-danger'>*New Password is required</p>}
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    type="password"
+                                    id="confirmPass"
+                                    label="Confirm New Password"
+                                    name="confirmPass"
+                                    {...register("confirmPass", { required: true })}
+                                    sx={classes.textFieldStyles}
+                                />
+                                {errors.confirmPass?.type === 'required' && <p role="alert" className='text-danger'>*Confirm New Password is required</p>}
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
                                 >
-                                    Create Password
+                                    Update Password
                                 </Button>
                             </Box>
                         </Box>
@@ -163,5 +189,5 @@ const CreateNewPassword = () => {
     );
 };
 
-export default CreateNewPassword;
+export default UpdatePassword;
 

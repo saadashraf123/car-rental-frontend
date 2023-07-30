@@ -1,41 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./style.module.css"
 import { Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material'
 import useFetch from '../../Hooks/useFetch';
-import BookingItem from '../../components/BookingItem';
-import carsData from '../../data/data.json'
-import { FeaturedItem } from '../../components';
-
+import FeedbackItem from '../../components/FeedbackItem'
+import { useStateContext } from '../../Contexts/stateContext';
 const Feedbacks = () => {
     const defaultTheme = createTheme();
-    const id = 3
+    const { user } = useStateContext();
     const url = {
         method: 'GET',
-        url: `booking/myBookings/${id}`,
+        url: `feedback/userFeedback/${user?.user_id}`,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         }
     };
 
-    const { data, error, loading } = useFetch(url);
-    // const result = data?.bookings
-    const result = carsData?.cars
-    console.log(result);
+    const { data, error, loading, fetchApi } = useFetch();
+    const result = data?.feedbacks
+
+    useEffect(() => {
+        if (user) {
+            fetchApi(url)
+        }
+    }, [])
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <Grid style={{ marginTop: '10px' }} container sx={{ height: '100%', justifyContent: 'center' }}>
-                <Paper elevation={6} square sx={{ p: 4, width: "90%" }}>
+                <Paper elevation={2} square sx={{ p: 4, width: "90%" }}>
                     <Box
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
+                            alignItems: 'left',
                         }}
                     >
                         {result?.map((item, index) => (
-                            <FeaturedItem key={index} data={item} />
+                            <FeedbackItem key={index} data={item} />
                         ))}
                     </Box>
                 </Paper>

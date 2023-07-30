@@ -1,26 +1,55 @@
-import React from 'react'
-import "./style.module.css"
-import { Link } from 'react-router-dom';
-import { Typography, Paper, Grid, Button, createStyles } from '@mui/material'
 
-const BookingItem = ({ data }) => {
+import React, { useEffect, useState } from 'react';
+import { Typography, Paper, Grid, Button, createStyles } from '@mui/material';
+import { useStateContext } from '../../Contexts/stateContext';
+import useFetch from '../../Hooks/useFetch';
+
+const BookingItem = ({ data, isPendingOrder }) => {
     const classes = createStyles({
-        ButtonStyles:
-        {
+        ButtonStyles: {
             width: 150,
-            backgroundColor: "#DC3545",
-            color: "white",
+            //   backgroundColor: "#DC3545",
+            //   color: "white",
             fontWeight: "bold",
             mt: 2,
             ml: 10,
             p: 1,
             mb: 2,
             '&:hover': {
-                backgroundColor: 'white',
-                color: "#DC3545"
+                // backgroundColor: 'white',
+                // color: "#DC3545",
             },
         },
     });
+
+    const { car_name, car_location, car_description, booking_id } = data;
+    const [request, setRequest] = useState("");
+
+    const url = {
+        method: request,
+        url: `booking/${booking_id}`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+    };
+
+    const { error, loading, fetchApi } = useFetch();
+
+    const handleAccept = async () => {
+        setRequest("PUT")
+    }
+    const handleDecline = async () => {
+        setRequest("delete")
+    }
+
+    useEffect(() => {
+        if (request) {
+            fetchApi(url)
+        }
+    }, [request])
+
+
     return (
         <Grid container sx={{ height: '100%', my: 3, justifyContent: 'center' }}>
             <Paper elevation={6} square sx={{ p: 4, width: "90%", display: "flex" }}>
@@ -30,36 +59,46 @@ const BookingItem = ({ data }) => {
                         variant="h5"
                         sx={{ color: 'black', fontWeight: 'bold', marginLeft: 10, marginTop: 2 }}
                     >
-                        {data.car_name}
+                        {car_name}
                     </Typography>
                     <Typography
                         component="h6"
                         variant="P"
                         sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
                     >
-                        {data.car_location}
+                        {car_location}
                     </Typography>
                     <Typography
                         component="p"
                         variant="body2"
                         sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
                     >
-                        {data.car_description}
+                        {car_description}
                     </Typography>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
-                        component={Link}
-                        to={"/details"}
-                        state={data}
-                    >
-                        View
-                    </Button>
-                </Grid>
-            </Paper >
-        </Grid >
-    )
-}
+                    <Typography>
+                        <br />
+                        <br />
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}> User name: </h6>
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Price : </h6>
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Location : </h6>
+                    </Typography>
+                    {isPendingOrder && (
+                        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
 
-export default BookingItem
+                            <Button style={{ backgroundColor: 'green', color: 'white' }}
+                                className={classes.ButtonStyles} variant="contained" onClick={handleAccept} >
+                                Accept
+                            </Button>
+                            <Button style={{ backgroundColor: 'red', color: 'white' }}
+                                className={classes.ButtonStyles} variant="contained" onClick={handleDecline}>
+                                Decline
+                            </Button>
+                        </div>
+                    )}
+                </Grid>
+            </Paper>
+        </Grid>
+    );
+};
+
+export default BookingItem;

@@ -1,65 +1,32 @@
-import React from 'react'
-import "./style.module.css"
-import { Link } from 'react-router-dom';
-import { Typography, Paper, Grid, Button, createStyles } from '@mui/material'
+import React, { useState } from 'react';
+import { Grid, Card, CardHeader, CardContent, Typography, Rating } from '@mui/material';
+
+const cardStyles = {
+    minWidth: "300px",
+    width: '60%',
+    margin: '30px 10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    borderRadius: '8px',
+};
+
 
 const FeedbackItem = ({ data }) => {
-    const classes = createStyles({
-        ButtonStyles:
-        {
-            width: 150,
-            backgroundColor: "#DC3545",
-            color: "white",
-            fontWeight: "bold",
-            mt: 2,
-            ml: 10,
-            p: 1,
-            mb: 2,
-            '&:hover': {
-                backgroundColor: 'white',
-                color: "#DC3545"
-            },
-        },
-    });
     return (
-        <Grid container sx={{ height: '100%', my: 3, justifyContent: 'center' }}>
-            <Paper elevation={6} square sx={{ p: 4, width: "90%", display: "flex" }}>
-                <Grid>
-                    <Typography
-                        component="h1"
-                        variant="h5"
-                        sx={{ color: 'black', fontWeight: 'bold', marginLeft: 10, marginTop: 2 }}
-                    >
-                        {data.car_name}
-                    </Typography>
-                    <Typography
-                        component="h6"
-                        variant="P"
-                        sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
-                    >
-                        {data.car_location}
-                    </Typography>
-                    <Typography
-                        component="p"
-                        variant="body2"
-                        sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
-                    >
-                        {data.car_description}
-                    </Typography>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        sx={[{ mt: 3, mb: 2 }, classes.ButtonStyles]}
-                        component={Link}
-                        to={"/details"}
-                        state={data}
-                    >
-                        View
-                    </Button>
-                </Grid>
-            </Paper >
-        </Grid >
-    )
-}
+        <Card style={cardStyles}>
+            <CardHeader title={data.firstname + " " + data.lastname} subheader={`Date: ${data.datetime}`} />
+            <CardContent>
+                <Typography variant="body1" gutterBottom>
+                    <strong>Rating:</strong> <Rating value="5" readOnly />
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                    Feedback: {data.fb_description}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                    Car: {data.car_name + " (" + data.car_category + ")"}
+                </Typography>
+            </CardContent>
+        </Card>
+    );
+};
 
 export default FeedbackItem

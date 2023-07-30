@@ -22,8 +22,8 @@ export { default as AddCar } from "./AddCar"
 
 export { default as Layout } from "./Layout"
 
-export { default as VerifyCode } from "./VerifyCode"
-
 export { default as CreateNewPassword } from "./CreateNewPassword"
 
 export { default as UpdateUserProfile } from "./UpdateUserProfile"
+
+export { default as UpdatePassword } from "./UpdatePassword"

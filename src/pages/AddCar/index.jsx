@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.module.css"
 import { Grid, TextField, createStyles, Paper, Typography, Box, Button, Input, MenuItem } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
-import carData from '../../data/data.json'
+import carsData from '../../data/data.json'
+import useFetch from '../../Hooks/useFetch';
+import { useStateContext } from "../../Contexts/stateContext";
+import { useNavigate } from 'react-router-dom';
 
 const AddCar = () => {
 
-    const [images, setImages] = useState(null)
+    const [images, setImages] = useState("")
     const defaultTheme = createTheme();
     const classes = createStyles({
         ButtonStyles:
@@ -15,7 +18,7 @@ const AddCar = () => {
             backgroundColor: "#DC3545",
             color: "white",
             width: "100%",
-            maxWidth: 500,
+            maxWidth: 300,
             fontWeight: "bold",
             my: 2,
             mr: 1,
@@ -49,40 +52,57 @@ const AddCar = () => {
             width: 0
         }
     });
-    const data = carData.carsComapny
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
-            file: images,
-            name: "",
-            model: "",
-            category: "",
-            location: "",
+            car_image: images,
+            car_name: "",
+            car_model: "",
+            car_category: "",
+            car_location: "",
             price: null,
-            description: ""
+            car_description: ""
         }
     });
+    const [carData, setCarData] = useState(null)
+
+    const url = {
+        method: 'POST',
+        url: `cars`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+        data: carData && carData,
+    };
+    const { data, error, loading, fetchApi } = useFetch()
+
+    const { user } = useStateContext();
     const addCarHandler = (data) => {
-        console.log(data);
+        const formData = new FormData();
+        formData.append('car_image', images); // 'car_image' should match the name attribute of the file input
+
+        // Append other form data fields to the formData object
+        formData.append('car_name', data.car_name);
+        formData.append('car_model', data.car_model);
+        formData.append('car_category', data.car_category);
+        formData.append('car_location', data.car_location);
+        formData.append('price', data.price);
+        formData.append('car_description', data.car_description);
+        formData.append('user_id', user?.user_id);
+
+        setCarData(formData)
     }
-
-
-    const MAX_LENGTH = 3;
-
-    const uploadMultipleFiles = (e) => {
-        if (Array.from(e.target.files).length > MAX_LENGTH) {
-            e.preventDefault();
-            alert(`Cannot upload files more than ${MAX_LENGTH}`);
-            reset({ file: null })
-            return setImages(null)
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (carData) {
+            fetchApi(url)
+                .then(() => navigate("/"))
         }
-        else {
-            return setImages(e.target.files)
+    }, [carData])
 
-        }
-    }
 
-    const carComapnyList = carData.carsComapny;
-    const carCategoryList = carData.carsCategory;
+    const carComapnyList = carsData.carsComapny;
+    const carCategoryList = carsData.carsCategory;
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -90,7 +110,6 @@ const AddCar = () => {
                 <Box
                     sx={{
                         alignItems: 'center',
-                        // maxWidth: "200vh"
                     }}
                 >
                     <Typography
@@ -100,73 +119,75 @@ const AddCar = () => {
                     >
                         Add A Car
                     </Typography>
-                    <Box sx={[{ m: 1 }, classes.boxStyles]} >
+                    <Box sx={{ m: 1 }} display="flex" flexDirection="column" alignItems="center">
                         {images && (
-                            Object.entries(images)?.map((index, item) => (
-                                <img style={{ maxHeight: "300px", marginBottom: "5px", flex: 0 }} className="writeImg" src={URL.createObjectURL(index[1])} alt="" />
-                            ))
+                            <img style={{ width: "60%", maxHeight: "300px", marginBottom: "5px" }} src={URL.createObjectURL(images)} alt="" />
                         )}
                     </Box>
-                    <Box component="form" onSubmit={handleSubmit(addCarHandler)} sx={{ mt: 2 }}>
+                    <Box component="form" enctype="multipart/form-data" onSubmit={handleSubmit(addCarHandler)} sx={{ mt: 2 }}>
                         <Input
                             fullWidth
-                            id="file"
+                            id="car_image"
                             label="Car Pictures"
-                            name="file"
-                            {...register("file", { required: true })}
+                            name="car_image"
+                            {...register("car_image", { required: true })}
                             type='file'
-                            inputProps={{ accept: 'image/*', multiple: true }}
-                            onChange={uploadMultipleFiles}
+                            inputProps={{
+                                accept: 'image/*'
+                                // , multiple: true
+                            }}
+                            // onChange={uploadMultipleFiles}
+                            onChange={(e) => setImages(e.target.files[0])}
                         />
-                        {errors.file?.type === 'required' && <p role="alert" className='text-danger'>*Car Image is required</p>}
+                        {errors.car_image?.type === 'required' && <p role="alert" className='text-danger'>*Car Image is required</p>}
                         <TextField
                             fullWidth
-                            id="carName"
+                            id="car_name"
                             label="Car Name"
-                            name="name"
+                            name="car_name"
                             variant="outlined"
                             select
-                            {...register("name", { required: true })}
+                            {...register("car_name", { required: true })}
                             sx={[classes.textFieldStyles, { mt: 2 }]}
                         >
                             {carComapnyList.map((item, index) => (
                                 <MenuItem value={item}>{item}</MenuItem>
                             ))}
                         </TextField>
-                        {errors.name?.type === 'required' && <p role="alert" className='text-danger'>*Car Name is required</p>}
+                        {errors.car_name?.type === 'required' && <p role="alert" className='text-danger'>*Car Name is required</p>}
                         <TextField
                             fullWidth
-                            id="carCategory"
+                            id="car_category"
                             label="Car Category"
-                            name="category"
+                            name="car_category"
                             variant="outlined"
                             select
-                            {...register("category", { required: true })}
+                            {...register("car_category", { required: true })}
                             sx={classes.textFieldStyles}
                         >
                             {carCategoryList.map((item, index) => (
                                 <MenuItem value={item}>{item}</MenuItem>
                             ))}
                         </TextField>
-                        {errors.category?.type === 'required' && <p role="alert" className='text-danger'>*Car Category is required</p>}
+                        {errors.car_category?.type === 'required' && <p role="alert" className='text-danger'>*Car Category is required</p>}
                         <TextField
                             fullWidth
-                            id="model"
+                            id="car_model"
                             label="Model"
-                            name="model"
-                            {...register("model", { required: true })}
+                            name="car_model"
+                            {...register("car_model", { required: true })}
                             sx={classes.textFieldStyles}
                         />
-                        {errors.model?.type === 'required' && <p role="alert" className='text-danger'>*Car Model is required</p>}
+                        {errors.car_model?.type === 'required' && <p role="alert" className='text-danger'>*Car Model is required</p>}
                         <TextField
                             fullWidth
-                            id="location"
+                            id="car_location"
                             label="Location"
-                            name="location"
-                            {...register("location", { required: true })}
+                            name="car_location"
+                            {...register("car_location", { required: true })}
                             sx={classes.textFieldStyles}
                         />
-                        {errors.location?.type === 'required' && <p role="alert" className='text-danger'>*Car Location is required</p>}
+                        {errors.car_location?.type === 'required' && <p role="alert" className='text-danger'>*Car Location is required</p>}
 
                         <TextField
                             type='number'
@@ -180,16 +201,15 @@ const AddCar = () => {
                         {errors.price?.type === 'required' && <p role="alert" className='text-danger'>*Car Price is required</p>}
                         <TextField
                             fullWidth
-                            id="description"
+                            id="car_description"
                             label="Description"
-                            name="description"
-                            {...register("description", { required: true })}
+                            name="car_description"
+                            {...register("car_description", { required: true })}
                             sx={classes.textFieldStyles}
                         />
-                        {errors.description?.type === 'required' && <p role="alert" className='text-danger'>*Car Description is required</p>}
+                        {errors.car_description?.type === 'required' && <p role="alert" className='text-danger'>*Car Description is required</p>}
                         <Button
                             type="submit"
-                            fullWidth
                             variant="contained"
                             sx={classes.ButtonStyles}
                         >
