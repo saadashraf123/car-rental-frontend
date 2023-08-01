@@ -36,9 +36,15 @@ const Feedbacks = () => {
                             alignItems: 'left',
                         }}
                     >
-                        {result?.map((item, index) => (
-                            <FeedbackItem key={index} data={item} />
-                        ))}
+                        {loading ? <div class="spinner-border mt-3" role="status" ></div> :
+                            result?.length ? result?.map((item, index) => (
+                                <FeedbackItem key={index} data={item} />
+                            ))
+                                :
+                                <h6 className='mt-3'>
+                                    No Feedback Found!
+                                </h6>
+                        }
                     </Box>
                 </Paper>
             </Grid>

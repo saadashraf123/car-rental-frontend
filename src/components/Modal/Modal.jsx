@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, createStyles, DialogTitle } from '@mui/material';
-import { MdDelete } from 'react-icons/md';
 
 
 const Modal = ({ children, btnText, modalTitle, handleConfirm, icon }) => {
@@ -42,11 +41,6 @@ const Modal = ({ children, btnText, modalTitle, handleConfirm, icon }) => {
 
     return (
         <div>
-            {icon ? <MdDelete style={{ fontSize: "28px", color: "red", cursor: "pointer" }} onClick={handleClickOpen} /> :
-                <Button variant="contained" sx={classes.ButtonStyles} onClick={handleClickOpen}>
-                    {btnText}
-                </Button>
-            }
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{modalTitle}</DialogTitle>
                 {children}

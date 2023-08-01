@@ -4,7 +4,7 @@ import { Layout } from "./pages";
 import { useEffect } from "react";
 import useFetch from "./Hooks/useFetch";
 import { useStateContext } from './Contexts/stateContext';
-// import UpdatePassword from "./pages/UpdateUserProfile";
+import swal from 'sweetalert';
 
 function App() {
     const { setUser, user } = useStateContext()

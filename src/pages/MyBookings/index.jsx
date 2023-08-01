@@ -68,13 +68,19 @@ const MyBookings = () => {
                     </Tabs>
 
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        {result?.map((item, index) => (
-                            <BookingItem
-                                key={index}
-                                data={item}
-                                isPendingOrder={currentTab === 2}
-                            />
-                        ))}
+                        {loading ? <div class="spinner-border my-5" role="status" ></div> :
+                            result?.length ? result?.map((item, index) => (
+                                <BookingItem
+                                    key={index}
+                                    data={item}
+                                    isPendingOrder={currentTab === 2}
+                                />
+                            ))
+                                :
+                                <h6 className='mt-5'>
+                                    Currently No Bookings
+                                </h6>
+                        }
                     </Box>
                 </Paper>
             </Grid>
