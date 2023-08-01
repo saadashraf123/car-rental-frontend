@@ -8,6 +8,8 @@ import { IconButton } from '@mui/material'
 import ButtonComponent from '../Button';
 import { createStyles } from '@mui/material'
 import { useStateContext } from '../../Contexts/stateContext';
+import swal from 'sweetalert';
+
 
 const NavBar = () => {
     const [scrolled, setScrolled] = useState(false)
@@ -39,8 +41,27 @@ const NavBar = () => {
         }
     });
     const logoutHandler = () => {
-        localStorage.removeItem("token")
-        window.location.reload();
+        swal({
+            title: "Are you sure you want to logout?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "No",
+                    value: null,
+                    visible: true,
+                },
+                confirm: {
+                    text: "Yes",
+                    value: true,
+                    visible: true,
+                },
+            },
+        }).then((value) => {
+            if (value) {
+                localStorage.removeItem("token")
+                window.location.reload();
+            }
+        });
     }
 
     return (

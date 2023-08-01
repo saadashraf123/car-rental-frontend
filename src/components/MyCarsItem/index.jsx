@@ -7,6 +7,10 @@ import useFetch from '../../Hooks/useFetch';
 import Modal from "../Modal/Modal";
 import { useStateContext } from '../../Contexts/stateContext';
 import { useForm } from 'react-hook-form';
+import swal from 'sweetalert';
+import { MdDelete } from 'react-icons/md';
+
+
 
 
 const MyCarsItem = ({ carData }) => {
@@ -68,18 +72,38 @@ const MyCarsItem = ({ carData }) => {
 
     useEffect(() => {
         if (request === "DELETE") {
-            fetchApi(deleteUrl)
-            if (data?.results?.affectedRows == 1) {
-                alert("Car deleted Succesfully")
-                navigate("/")
-            }
+            swal({
+                title: "Are you sure you want to delete this car?",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No",
+                        value: null,
+                        visible: true,
+                    },
+                    confirm: {
+                        text: "Yes",
+                        value: true,
+                        visible: true,
+                    },
+                },
+            }).then((value) => {
+                if (value) {
+                    fetchApi(deleteUrl)
+                    if (data?.results?.affectedRows === 1) {
+                        swal("Success!", "Car Deleted Successfully!", "success");
+                        navigate("/")
+                    }
+                }
+            });
+
         }
     }, [request])
 
     useEffect(() => {
         fetchApi(updateUrl)
-        if (data?.results?.affectedRows == 1) {
-            alert("Car Updated Succesfully")
+        if (data?.results?.affectedRows === 1) {
+            swal("Success!", "Car Updated Successfully!", "success");
             // window.location.reload()
             navigate("/")
         }
@@ -95,13 +119,9 @@ const MyCarsItem = ({ carData }) => {
                 </div>
                 <Grid>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                        <Modal icon={true} modalTitle="Are you Sure, you want to delete car" handleConfirm={handleSubmit(handleDeleteCar)} >
-                            <DialogContent>
-                                <DialogContentText>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat facere quasi laborum, tempora sit quam quod, unde saepe blanditiis similique praesentium odio deserunt consectetur nulla consequatur cupiditate incidunt enim earum?
-                                </DialogContentText>
-                            </DialogContent>
-                        </Modal>
+                        <Button variant="none" style={{ fontSize: "32px" }} onClick={handleSubmit(handleDeleteCar)}>
+                            <MdDelete style={{ fontSize: "28px", color: "red", cursor: "pointer" }} />
+                        </Button>
                         <Button onClick={availableToggle} style={{ fontSize: "32px" }}>
                             {carData.available ? <BsToggleOn style={{ color: "green" }} /> : <BsToggleOff style={{ color: "gray" }} />}
                         </Button>

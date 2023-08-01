@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Paper, Grid, Button, createStyles } from '@mui/material';
 import { useStateContext } from '../../Contexts/stateContext';
 import useFetch from '../../Hooks/useFetch';
+import swal from 'sweetalert';
+
 
 const BookingItem = ({ data, isPendingOrder }) => {
     const classes = createStyles({
@@ -46,6 +48,13 @@ const BookingItem = ({ data, isPendingOrder }) => {
     useEffect(() => {
         if (request) {
             fetchApi(url)
+                .then(() => {
+                    swal("Success!", `Booking ${request === "PUT" ? "Approved" : "Declined"} Successfully!`, "success");
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    swal("Something Went Wrong!", "Try again later!", "error");
+                })
         }
     }, [request])
 

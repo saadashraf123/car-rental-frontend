@@ -7,6 +7,8 @@ import carsData from '../../data/data.json'
 import useFetch from '../../Hooks/useFetch';
 import { useStateContext } from "../../Contexts/stateContext";
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 const AddCar = () => {
 
@@ -96,7 +98,13 @@ const AddCar = () => {
     useEffect(() => {
         if (carData) {
             fetchApi(url)
-                .then(() => navigate("/"))
+                .then(() => {
+                    swal("Good job!", "Car Added Successfully!", "success");
+                    navigate("/")
+                })
+                .catch(() => {
+                    swal("Something Went Wrong!", "Couldn't add the Car!", "error");
+                })
         }
     }, [carData])
 

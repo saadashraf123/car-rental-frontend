@@ -21,7 +21,6 @@ const MyCars = () => {
 
     const { data, error, loading, fetchApi } = useFetch();
     const result = data?.car
-
     useEffect(() => {
         fetchApi(url)
     }, [])
@@ -37,9 +36,15 @@ const MyCars = () => {
                             alignItems: 'center',
                         }}
                     >
-                        {result?.map((item, index) => (
-                            <MyCarsItem key={index} carData={item} />
-                        ))}
+                        {loading ? <div class="spinner-border" role="status"></div> :
+                            (result?.length ? result?.map((item, index) => (
+                                <MyCarsItem key={index} carData={item} />
+                            ))
+                                :
+                                <h6 className='mt-2'>
+                                    You didn't Add any Car!
+                                </h6>)
+                        }
                     </Box>
                 </Paper>
             </Grid>

@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import useFetch from "../../Hooks/useFetch";
 import { useStateContext } from "../../Contexts/stateContext";
 import { useNavigate } from "react-router-dom";
+import swal from 'sweetalert';
+
 
 const Contact = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -89,9 +91,9 @@ const Contact = () => {
         if (credentials) {
             fetchApi(url)
                 .then((result) => {
-                    window.location.reload()
+                    swal("Success!", "success");
                 }).catch((err) => {
-                    alert(err)
+                    swal("Error!", "Something Went Wrong!", "error");
                 });
         }
     }, [credentials])

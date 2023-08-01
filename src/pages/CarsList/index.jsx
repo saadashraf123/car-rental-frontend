@@ -39,11 +39,17 @@ const CarsList = () => {
                             alignItems: 'center',
                         }}
                     >
-                        {result?.map((item, index) => (
-                            user.user_id !== item.user_id
-                            &&
-                            <CarsItem key={index} data={item} />
-                        ))}
+                        {loading ? <div class="spinner-border" role="status" ></div> :
+                            result?.length ? result?.map((item, index) => (
+                                user.user_id !== item.user_id
+                                &&
+                                <CarsItem key={index} data={item} />
+                            ))
+                                :
+                                <h6 className='mt-5'>
+                                    No cars To Show related to your search
+                                </h6>
+                        }
                     </Box>
                 </Paper>
             </Grid>
