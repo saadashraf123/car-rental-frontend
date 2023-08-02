@@ -7,7 +7,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false)
 
     const apiInstance = axios.create({
-        baseURL: "http://localhost:3000",
+        baseURL: "https://folio-car-rental-app.azurewebsites.net",
     });
 
     apiInstance.interceptors.request.use((req) => {
