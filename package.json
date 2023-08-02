@@ -32,7 +32,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "create:component": "./scripts/create-node.sh components",
     "create:page": "./scripts/create-node.sh pages"
