@@ -72,7 +72,7 @@ const Login = () => {
         if (data) {
             localStorage.setItem("token", data?.token)
             setUser(data?.user)
-            navigate('/')
+            navigate("/car-rental-frontend/")
         }
     }, [data?.token])
 

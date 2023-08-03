@@ -84,7 +84,7 @@ const Forgetpassword = () => {
             fetchApi(url)
                 .then(() => {
                     alert("Email Sent Successfully")
-                    navigate("/login")
+                    navigate("/car-rental-frontend/login")
                 })
         }
     }, [credentials])

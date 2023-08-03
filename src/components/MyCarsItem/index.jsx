@@ -92,7 +92,7 @@ const MyCarsItem = ({ carData }) => {
                     fetchApi(deleteUrl)
                     if (data?.results?.affectedRows === 1) {
                         swal("Success!", "Car Deleted Successfully!", "success");
-                        navigate("/")
+                        navigate("/car-rental-frontend/")
                     }
                 }
             });
@@ -105,7 +105,7 @@ const MyCarsItem = ({ carData }) => {
         if (data?.results?.affectedRows === 1) {
             swal("Success!", "Car Updated Successfully!", "success");
             // window.location.reload()
-            navigate("/")
+            navigate("/car-rental-frontend/")
         }
     }, [available])
 

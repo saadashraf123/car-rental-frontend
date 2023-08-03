@@ -46,10 +46,10 @@ function App() {
                     <Route path="UpdateUserProfile" element={user ? <UpdateUserProfile /> : <Login />} />
                     <Route path="UpdatePassword" element={user ? <UpdatePassword /> : <Login />} />
                 </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/forgetpassword" element={<ForgetPassword />} />
-                <Route path="/createNewPassword/:token" element={<CreateNewPassword />} />
+                <Route path="car-rental-frontend/login" element={<Login />} />
+                <Route path="car-rental-frontend/signup" element={<Signup />} />
+                <Route path="car-rental-frontend/forgetpassword" element={<ForgetPassword />} />
+                <Route path="car-rental-frontend/createNewPassword/:token" element={<CreateNewPassword />} />
             </Routes>
         </>
     );

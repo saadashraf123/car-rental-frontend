@@ -103,7 +103,7 @@ const UpdatePassword = () => {
             if (credentials.password === credentials.confirmPass) {
                 fetchApi(updateUrl)
                 alert("Password Updated Successfully")
-                navigate("/")
+                navigate("/car-rental-frontend/")
             }
             else {
                 alert("New Password and Confirm New Password Must be Same")

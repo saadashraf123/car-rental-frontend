@@ -89,7 +89,7 @@ const Contact = () => {
             setCredentials(data.message)
         }
         else {
-            navigate("/login")
+            navigate("/car-rental-frontend/login")
         }
     }
 

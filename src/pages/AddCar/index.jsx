@@ -100,7 +100,7 @@ const AddCar = () => {
             fetchApi(url)
                 .then(() => {
                     swal("Good job!", "Car Added Successfully!", "success");
-                    navigate("/")
+                    navigate("/car-rental-frontend/")
                 })
                 .catch(() => {
                     swal("Something Went Wrong!", "Couldn't add the Car!", "error");

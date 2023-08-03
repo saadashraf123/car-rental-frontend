@@ -92,7 +92,7 @@ const CreateNewPassword = () => {
         fetchApi(url)
         // .then(() => {
         //     alert("Password Reset Successfully! Go back to Log in Page")
-        //     // navigate("/")
+        //     // navigate("/car-rental-frontend/")
         // })
     }, [credentials])
 

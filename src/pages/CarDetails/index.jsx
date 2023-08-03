@@ -71,7 +71,7 @@ const CarDetails = () => {
             })
         }
         else {
-            navigate("/login")
+            navigate("/car-rental-frontend/login")
         }
     }
 
@@ -86,7 +86,7 @@ const CarDetails = () => {
             })
         }
         else {
-            navigate("/login")
+            navigate("/car-rental-frontend/login")
         }
     }
     const navigate = useNavigate();
@@ -101,7 +101,7 @@ const CarDetails = () => {
             fetchApi(bookingUrl)
                 .then(() => {
                     swal("Success!", "Booking Added Successfully!", "success");
-                    navigate("/")
+                    navigate("/car-rental-frontend/")
                 })
                 .catch((error) => {
                     swal("Error!", "Couldn't Add Booking!", "error");

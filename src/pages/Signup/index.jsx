@@ -90,7 +90,7 @@ const Signup = () => {
 
     useEffect(() => {
         if (data?.user.affectedRows == 1) {
-            navigate("/")
+            navigate("/car-rental-frontend/")
         }
     }, [data])
 

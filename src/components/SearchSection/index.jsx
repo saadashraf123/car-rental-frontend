@@ -23,7 +23,7 @@ const SearchSection = () => {
     const navigate = useNavigate()
     const submitHandler = (result) => {
         setData(result);
-        navigate("/search", { state: result })
+        navigate("/car-rental-frontend/search", { state: result })
     }
 
     const classes = createStyles({
