@@ -34,7 +34,7 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/car-rental-frontend" element={<Layout />}>
+                <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/search" element={<CarsList />} />
                     <Route path="/details" element={<CarDetails />} />
