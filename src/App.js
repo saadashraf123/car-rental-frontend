@@ -34,17 +34,17 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/search" element={<CarsList />} />
-                    <Route path="/details" element={<CarDetails />} />
-                    <Route path="/mybookings" element={user ? <MyBookings /> : <Login />} />
-                    <Route path="/mycars" element={user ? <MyCars /> : <Login />} />
-                    <Route path="/feedbacks" element={user ? <Feedbacks /> : <Login />} />
-                    <Route path="/settings" element={user ? <Settings /> : <Login />} />
-                    <Route path="/addcar" element={user ? <AddCar /> : <Login />} />
-                    <Route path="/UpdateUserProfile" element={user ? <UpdateUserProfile /> : <Login />} />
-                    <Route path="/UpdatePassword" element={user ? <UpdatePassword /> : <Login />} />
+                <Route path="car-rental-frontend" element={<Layout />}>
+                    <Route path="" element={<Home />} />
+                    <Route path="search" element={<CarsList />} />
+                    <Route path="details" element={<CarDetails />} />
+                    <Route path="mybookings" element={user ? <MyBookings /> : <Login />} />
+                    <Route path="mycars" element={user ? <MyCars /> : <Login />} />
+                    <Route path="feedbacks" element={user ? <Feedbacks /> : <Login />} />
+                    <Route path="settings" element={user ? <Settings /> : <Login />} />
+                    <Route path="addcar" element={user ? <AddCar /> : <Login />} />
+                    <Route path="UpdateUserProfile" element={user ? <UpdateUserProfile /> : <Login />} />
+                    <Route path="UpdatePassword" element={user ? <UpdatePassword /> : <Login />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
