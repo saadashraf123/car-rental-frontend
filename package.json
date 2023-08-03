@@ -1,5 +1,6 @@
 {
   "name": "car-rental",
+  "homepage": "https://saadashraf123.github.io/car-rental-frontend",
   "version": "0.1.0",
   "private": true,
   "_moduleAliases": {
@@ -21,6 +22,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "firebase": "^10.1.0",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
@@ -31,10 +33,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
+    "build": "react-scripts build",
     "eject": "react-scripts eject",
     "create:component": "./scripts/create-node.sh components",
-    "create:page": "./scripts/create-node.sh pages"
+    "create:page": "./scripts/create-node.sh pages",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
