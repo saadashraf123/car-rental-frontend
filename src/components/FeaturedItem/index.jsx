@@ -24,9 +24,9 @@ const FeaturedItem = ({ data }) => {
     return (
         <div className="col-md-4 mb-3">
             <div className="card">
-                {/* <img className="img-fluid" alt="100%x280" src={data.car_image} style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)", maxHeight: "350px" }} /> */}
+                <img className="img-fluid" alt="100%x280" src={`data:image/*;base64,${data?.car_image}`} style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)", maxHeight: "350px" }} />
                 <div className="card-body">
-                
+
                     <Typography
                         component="h1"
                         variant="h5"

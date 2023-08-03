@@ -11,6 +11,7 @@ import swal from 'sweetalert';
 
 const Contact = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [userDetails, setUserDetails] = useState(null);
     const typographyStyles = {
         color: "#000",
         opacity: "0.8",
@@ -58,13 +59,18 @@ const Contact = () => {
     const { user } = useStateContext()
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            name: user?.firstName,
-            email: user?.email,
-            phone: user?.phone,
+            name: userDetails?.firstName,
+            email: userDetails?.email,
+            phone: userDetails?.phone,
             message: ''
         }
     });
     const [credentials, setCredentials] = useState(null)
+
+    useEffect(() => {
+        setUserDetails(user)
+    }, [user])
+
 
     const url = {
         method: 'POST',

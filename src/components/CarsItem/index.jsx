@@ -26,7 +26,7 @@ const CarsItem = ({ data }) => {
             <Paper elevation={6} square sx={{ p: 4, width: "90%", display: "flex" }}>
                 <div class="col-md-4 mb-3">
                     <div class="card">
-                        <img style={{ height: "40vh" }} class="img-fluid" alt="100%x280" src={data.car_image} />
+                        <img style={{ height: "40vh" }} class="img-fluid" alt="100%x280" src={`data:image/*;base64,${data.car_image}`} />
                     </div>
                 </div>
                 <Grid>

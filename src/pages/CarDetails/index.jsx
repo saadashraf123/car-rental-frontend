@@ -130,7 +130,7 @@ const CarDetails = () => {
                         <Grid container maxHeight="auto" padding={5} spacing={5} elevation={5} component={Paper}>
                             <Grid item md={6} xs={12} sx={{}}>
                                 <Box sx={{}}>
-                                    <img style={{ height: "40vh" }} class="img-fluid" alt="100%x280" src={`carData:image/*;base64,${carData?.car_image}`} />
+                                    <img style={{ height: "40vh" }} class="img-fluid" alt="100%x280" src={`data:image/*;base64,${carData?.car_image}`} />
                                 </Box>
                             </Grid>
                             <Grid item md={6} xs={12} sx={{}}>
