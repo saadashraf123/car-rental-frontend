@@ -58,38 +58,40 @@ const BookingItem = ({ data, isPendingOrder }) => {
         }
     }, [request])
 
+    const totalHours = data?.total_rent / data?.price;
+
 
     return (
         <Grid container sx={{ height: '100%', my: 3, justifyContent: 'center' }}>
             <Paper elevation={6} square sx={{ p: 4, width: "90%", display: "flex" }}>
                 <Grid>
+                    <img style={{ height: "30vh" }} class="" alt="100%x280" src={`data:image/*;base64,${data?.car_image}`} />
                     <Typography
                         component="h1"
                         variant="h5"
-                        sx={{ color: 'black', fontWeight: 'bold', marginLeft: 10, marginTop: 2 }}
+                        sx={{ color: 'black', fontWeight: 'bold', marginTop: 3 }}
                     >
-                        {car_name}
+                        Car Name: {car_name}
                     </Typography>
                     <Typography
                         component="h6"
                         variant="P"
-                        sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
+                        sx={{ color: 'gray', marginTop: 1 }}
                     >
-                        {car_location}
+                        Car Location: {car_location}
                     </Typography>
                     <Typography
                         component="p"
                         variant="body2"
-                        sx={{ color: 'gray', marginLeft: 10, marginTop: 3 }}
+                        sx={{ color: 'gray', marginTop: 1 }}
                     >
-                        {car_description}
+                        Car Description: {car_description}
                     </Typography>
                     <Typography>
                         <br />
-                        <br />
-                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}> User name: </h6>
-                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Price : </h6>
-                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Location : </h6>
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}> Full name: {data?.firstname + " " + data.lastname} </h6>
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Price : {data?.total_rent}/rs</h6>
+                        <h6 style={{ fontSize: '14.5px', color: '#5A5A5A', marginLeft: '3%' }}>Hours :{totalHours} Hrs</h6>
                     </Typography>
                     {isPendingOrder && (
                         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>

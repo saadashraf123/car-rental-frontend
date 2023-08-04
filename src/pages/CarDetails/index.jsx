@@ -219,29 +219,33 @@ const CarDetails = () => {
                         >
                             Reviews
                         </Typography>
-                        <Box component="form" onSubmit={handleSubmit(addReviewHandler)} sx={{ mt: 1 }}>
-                            <TextField
-                                margin="normal"
-                                // required
-                                fullWidth
-                                name="review"
-                                label="Add Review"
-                                type="text"
-                                id="review"
-                                {...register("review", { required: true })}
-                            // sx={classes.textFieldStyles}
+                        {
+                            carData?.user_id !== user?.user_id &&
 
-                            />
-                            {errors.review?.type === 'required' && <p role="alert" className='text-danger'>*Review is required</p>}
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Submit Review
-                            </Button>
-                        </Box>
+                            <Box component="form" onSubmit={handleSubmit(addReviewHandler)} sx={{ mt: 1 }}>
+                                <TextField
+                                    margin="normal"
+                                    // required
+                                    fullWidth
+                                    name="review"
+                                    label="Add Review"
+                                    type="text"
+                                    id="review"
+                                    {...register("review", { required: true })}
+                                // sx={classes.textFieldStyles}
+
+                                />
+                                {errors.review?.type === 'required' && <p role="alert" className='text-danger'>*Review is required</p>}
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Submit Review
+                                </Button>
+                            </Box>
+                        }
                         {loading ? <div class="spinner-border" role="status" ></div> :
                             result?.length ? result?.map((item, index) => (
                                 <FeedbackItem data={item} />

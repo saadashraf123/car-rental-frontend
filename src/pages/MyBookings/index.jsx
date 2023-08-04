@@ -24,6 +24,7 @@ const MyBookings = () => {
 
     const { data, error, loading, fetchApi } = useFetch();
     const result = data?.bookings
+    console.log(result);
 
     useEffect(() => {
         fetchApi(url)
