@@ -103,7 +103,7 @@ const CreateNewPassword = () => {
                     },
                 }).then((value) => {
                     if (value) {
-                        navigate("/login")
+                        // navigate("/login")
                     }
                 })
             })

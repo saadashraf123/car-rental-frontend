@@ -59,7 +59,8 @@ const NavBar = () => {
         }).then((value) => {
             if (value) {
                 localStorage.removeItem("token")
-                window.location.reload();
+                navigate("/")
+                navigate(0)
             }
         });
     }
