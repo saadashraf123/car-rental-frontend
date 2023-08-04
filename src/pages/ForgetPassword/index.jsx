@@ -11,6 +11,7 @@ import { createStyles, createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../Hooks/useFetch';
+import swal from 'sweetalert';
 
 const Forgetpassword = () => {
     const defaultTheme = createTheme();
@@ -83,8 +84,21 @@ const Forgetpassword = () => {
         if (credentials) {
             fetchApi(url)
                 .then(() => {
-                    alert("Email Sent Successfully")
-                    navigate("/login")
+                    swal({
+                        title: "Email Sent Successfully!",
+                        icon: "success",
+                        buttons: {
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                            },
+                        },
+                    }).then((value) => {
+                        if (value) {
+                            navigate("/login")
+                        }
+                    })
                 })
         }
     }, [credentials])
@@ -112,11 +126,10 @@ const Forgetpassword = () => {
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 2 }}>
                             <TextField
-                                // margin="normal"
-                                // fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
+                                type='email'
                                 autoFocus
                                 {...register("email", { required: true })}
                                 sx={classes.textFieldStyles}

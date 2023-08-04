@@ -41,6 +41,7 @@ const Modal = ({ children, btnText, modalTitle, handleConfirm, icon }) => {
 
     return (
         <div>
+            <Button variant="contained" sx={classes.ButtonStyles} onClick={handleClickOpen}>{btnText}</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{modalTitle}</DialogTitle>
                 {children}

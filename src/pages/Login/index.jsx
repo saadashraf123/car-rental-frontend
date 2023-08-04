@@ -124,6 +124,7 @@ const Login = () => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
+                                type='email'
                                 {...register("email", { required: true })}
                                 // autoFocus
                                 sx={classes.textFieldStyles}

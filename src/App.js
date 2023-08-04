@@ -17,7 +17,7 @@ function App() {
         }
     };
 
-    const { data, fetchApi } = useFetch();
+    const { loading, data, fetchApi } = useFetch();
     useEffect(() => {
         fetchApi(url)
             .then(() => {
@@ -45,11 +45,11 @@ function App() {
                     <Route path="/addcar" element={user ? <AddCar /> : <Login />} />
                     <Route path="/UpdateUserProfile" element={user ? <UpdateUserProfile /> : <Login />} />
                     <Route path="/UpdatePassword" element={user ? <UpdatePassword /> : <Login />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgetpassword" element={<ForgetPassword />} />
+                    <Route path="/createNewPassword/:token" element={<CreateNewPassword />} />
                 </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/forgetpassword" element={<ForgetPassword />} />
-                <Route path="/createNewPassword/:token" element={<CreateNewPassword />} />
             </Routes>
         </>
     );

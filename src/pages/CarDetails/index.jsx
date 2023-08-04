@@ -100,8 +100,21 @@ const CarDetails = () => {
         if (carData?.available && bookingData) {
             fetchApi(bookingUrl)
                 .then(() => {
-                    swal("Success!", "Booking Added Successfully!", "success");
-                    navigate("/")
+                    swal({
+                        title: "Booking Added Successfully!",
+                        icon: "success",
+                        buttons: {
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                            },
+                        },
+                    }).then((value) => {
+                        if (value) {
+                            navigate(0)
+                        }
+                    })
                 })
                 .catch((error) => {
                     swal("Error!", "Couldn't Add Booking!", "error");
@@ -114,7 +127,7 @@ const CarDetails = () => {
             fetchApi(feedbackUrl)
                 .then(() => {
                     swal("Success!", "Feedback Added Successfully!", "success")
-                    window.location.reload();
+                    navigate(0)
                 })
                 .catch((error) => {
                     swal("Error!", "Couldn't Add Feedback!", "error");
@@ -164,7 +177,7 @@ const CarDetails = () => {
                                     >
                                         Rent: {carData.price} Rs/hr
                                     </Typography>
-                                    {carData?.user_id === user?.user_id ? "" :
+                                    {carData?.user_id !== user?.user_id &&
                                         <Modal btnText="Book Now" modalTitle="Confirm Your Booking" handleConfirm={confirmBooking} >
                                             <DialogContent>
                                                 <DialogContentText>
@@ -178,6 +191,7 @@ const CarDetails = () => {
                                                     type="number"
                                                     fullWidth
                                                     variant="standard"
+                                                    required
                                                     onChange={(e) => setHours(e.target.value)}
                                                 />
                                                 <TextField
@@ -188,6 +202,7 @@ const CarDetails = () => {
                                                     type="text"
                                                     fullWidth
                                                     variant="standard"
+                                                    required
                                                     onChange={(e) => setDescription(e.target.value)}
                                                 />
                                             </DialogContent>

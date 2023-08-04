@@ -41,7 +41,7 @@ const CarsList = () => {
                     >
                         {loading ? <div class="spinner-border" role="status" ></div> :
                             result?.length ? result?.map((item, index) => (
-                                user.user_id !== item.user_id
+                                user?.user_id !== item.user_id
                                 &&
                                 <CarsItem key={index} data={item} />
                             ))

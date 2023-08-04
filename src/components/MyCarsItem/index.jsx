@@ -11,11 +11,8 @@ import swal from 'sweetalert';
 import { MdDelete } from 'react-icons/md';
 
 
-
-
 const MyCarsItem = ({ carData }) => {
-    const [available, setAvailable] = useState(true)
-    const [password, setPassword] = useState("")
+    const [available, setAvailable] = useState(carData?.available)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -103,10 +100,25 @@ const MyCarsItem = ({ carData }) => {
     useEffect(() => {
         fetchApi(updateUrl)
         if (data?.results?.affectedRows === 1) {
-            swal("Success!", "Car Updated Successfully!", "success");
+            swal({
+                title: "Car Updated Successfully!",
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        text: "OK",
+                        value: true,
+                        visible: true,
+                    },
+                },
+            }).then((value) => {
+                if (value) {
+                    navigate(0)
+                }
+            })
+            // swal("Success!", "Car Updated Successfully!", "success")
             // window.location.reload()
-            navigate("/")
         }
+        // navigate(0)
     }, [available])
 
     return (
@@ -123,7 +135,7 @@ const MyCarsItem = ({ carData }) => {
                             <MdDelete style={{ fontSize: "28px", color: "red", cursor: "pointer" }} />
                         </Button>
                         <Button onClick={availableToggle} style={{ fontSize: "32px" }}>
-                            {carData.available ? <BsToggleOn style={{ color: "green" }} /> : <BsToggleOff style={{ color: "gray" }} />}
+                            {carData?.available ? <BsToggleOn style={{ color: "green" }} /> : <BsToggleOff style={{ color: "gray" }} />}
                         </Button>
                     </Box>
                     <Typography

@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider, createStyles } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useFetch from '../../Hooks/useFetch';
+import swal from 'sweetalert';
 
 
 const CreateNewPassword = () => {
@@ -77,23 +78,35 @@ const CreateNewPassword = () => {
         },
         data: { password: credentials?.password }
     };
-    const loginHandler = (data) => {
+    const createPassHandler = (data) => {
         if (data.password === data.confirmPassword) {
             setCredentials(data)
-            alert("Password Reset Successfully")
         }
         else {
-            alert("Password and Confirm Password Must Be Same")
+            swal("Error", "Password and Confirm Password Must Be Same", "error")
         }
 
     }
 
     useEffect(() => {
         fetchApi(url)
-        // .then(() => {
-        //     alert("Password Reset Successfully! Go back to Log in Page")
-        //     // navigate("/")
-        // })
+            .then(() => {
+                swal({
+                    title: "Password Reset Successfully!",
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            text: "OK",
+                            value: true,
+                            visible: true,
+                        },
+                    },
+                }).then((value) => {
+                    if (value) {
+                        navigate("/login")
+                    }
+                })
+            })
     }, [credentials])
 
 
@@ -120,7 +133,7 @@ const CreateNewPassword = () => {
                             <Typography component="h1" variant="h6">
                                 Create New Password
                             </Typography>
-                            <Box component="form" onSubmit={handleSubmit(loginHandler)} sx={{ mt: 2 }}>
+                            <Box component="form" onSubmit={handleSubmit(createPassHandler)} sx={{ mt: 2 }}>
                                 <TextField
                                     margin="normal"
                                     fullWidth

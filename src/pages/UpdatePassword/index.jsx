@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useFetch from '../../Hooks/useFetch';
 import { useStateContext } from '../../Contexts/stateContext';
+import swal from 'sweetalert';
 
 
 const UpdatePassword = () => {
@@ -102,11 +103,24 @@ const UpdatePassword = () => {
         if (data?.flag === 1) {
             if (credentials.password === credentials.confirmPass) {
                 fetchApi(updateUrl)
-                alert("Password Updated Successfully")
-                navigate("/")
+                swal({
+                    title: "Password Updated Successfully!",
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            text: "OK",
+                            value: true,
+                            visible: true,
+                        },
+                    },
+                }).then((value) => {
+                    if (value) {
+                        navigate(0)
+                    }
+                })
             }
             else {
-                alert("New Password and Confirm New Password Must be Same")
+                swal("Error", "New Password and Confirm New Password Must be Same", "error")
             }
         }
     }, [data])
